@@ -54,7 +54,7 @@ function App() {
       title: 'Starts In An Hour',
       home: 'Home Team',
       away: 'Away Team',
-      twitch: 'rocketleague ',
+      twitch: 'radfordesports',
       matchTime: new Date(Date.now() + 60 * 60 * 1000),
       game: 'smashultimate'
     },
