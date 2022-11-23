@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { formatSchedule } from '../utils/schedule';
 import Match, { MatchProps } from './Match';
 
@@ -8,11 +8,7 @@ export type ScheduleProps = {
 }
 
 export default function Schedule(props: ScheduleProps) {
-    const [schedule, setSchedule] = useState<MatchProps[]>([]);
-
-    useEffect(() => {
-        setSchedule(formatSchedule(props.schedule));
-    }, [props.schedule]);
+    const schedule = formatSchedule(props.schedule); 
 
   return (
     <Box
