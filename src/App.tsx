@@ -20,8 +20,7 @@ function App() {
     },
     {
       title: 'Almost One Day Ago',
-      home: 'Home Team',
-      away: 'Away Team',
+      home: 'Location',
       twitch: 'radfordesports',
       matchTime: new Date(Date.now() - 24 * 60 * 60 * 999),
       game: 'other'

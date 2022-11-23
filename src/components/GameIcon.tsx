@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import { MatchProps } from './Match';
 import React from 'react'
 import rocketleagueIcon from '../assets/rocketleague.png';
 import valorantIcon from '../assets/valorant.png';
@@ -8,12 +9,14 @@ import smashultimateIcon from '../assets/smashultimate.png';
 import fifaIcon from '../assets/fifa.png';
 import nba2kIcon from '../assets/nba2k.png';
 
+
 type GameIconProps = {
-    game: string
+    game: MatchProps['game']
+
 }
 
 export default function GameIcon({ game }: GameIconProps) {
-    let image;
+    let image: string;
     switch(game){
         case 'rocketleague':
             image = rocketleagueIcon;
@@ -34,10 +37,10 @@ export default function GameIcon({ game }: GameIconProps) {
             image = nba2kIcon;
             break;
         default:
-            image = '';
+            image = 'other';
     }
 
-    return ((image === '') ? 
+    return ((image === 'other') ? 
     <VideogameAssetIcon sx={{ fontSize: '110px', color: '#FFFFFF', marginRight: '10px'}}/> : 
     <Box
         component={'img'}

@@ -7,10 +7,10 @@ import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
 export type MatchProps = {
     title: string,
     home: string,
-    away: string,
+    away?: string,
     twitch: string,
     matchTime: Date,
-    game: string
+    game: 'rocketleague' | 'valorant' | 'leagueoflegends' | 'smashultimate' | 'fifa' | 'nba2k' | 'other'
 }
 
 export default function Match(props: MatchProps) {
@@ -27,7 +27,7 @@ export default function Match(props: MatchProps) {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant='h6' noWrap sx={{ maxWidth: '24em' }} >
-                                {props.home} vs {props.away}
+                                {props.home}{props.away ? ` vs ${props.away}` : ''}
                             </Typography>  
                         </Grid>
                         <Grid item xs={12}>
