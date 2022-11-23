@@ -1,36 +1,43 @@
 export const formatMatchDate = (d: Date): string => {
-    
-
     const msLeftInWeek = 6 * 24 * 60 * 60 * 1000;
     let day = '';
 
-    if (d.getTime() < Date.now()){
+    if (d.getTime() < Date.now() - 60 * 60 * 1000){
         return 'Completed';
+    }
+    
+    if(d.getTime() < Date.now()){
+        return 'Live Now';
     }
 
     if(Date.now() + msLeftInWeek > d.getTime()){
-        switch(d.getDay()){
-            case 0:
-                day = 'Sunday';
-                break;
-            case 1:
-                day = 'Monday';
-                break;
-            case 2:
-                day = 'Tuesday';
-                break;
-            case 3:
-                day = 'Wednesday';
-                break;
-            case 4:
-                day = 'Thursday';
-                break;
-            case 5:
-                day = 'Friday';
-                break;
-            case 6:
-                day = 'Saturday';
-                break;
+        if(d.getDay() === new Date().getDay()){
+            day = 'Today';
+        } 
+        else{
+            switch(d.getDay()){
+                case 0:
+                    day = 'Sunday';
+                    break;
+                case 1:
+                    day = 'Monday';
+                    break;
+                case 2:
+                    day = 'Tuesday';
+                    break;
+                case 3:
+                    day = 'Wednesday';
+                    break;
+                case 4:
+                    day = 'Thursday';
+                    break;
+                case 5:
+                    day = 'Friday';
+                    break;
+                case 6:
+                    day = 'Saturday';
+                    break;
+            }
         }  
     }
     else {
