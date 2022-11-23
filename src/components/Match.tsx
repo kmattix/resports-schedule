@@ -61,23 +61,23 @@ export type MatchProps = {
 
 export default function Match(props: MatchProps) {
   return (
-    <Card sx={{backgroundColor: '#333333'}}>
+    <Card>
         <CardContent>
             <Grid container>
                 <Grid item xs={10}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography variant='h4' color={'#FFFFFF'} noWrap sx={{ maxWidth: '14em' }}>
+                            <Typography variant='h4' color={'text.secondary'} noWrap sx={{ maxWidth: '14em' }}>
                                 {props.title}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant='h6' color={'#E6E6E6'} noWrap sx={{ maxWidth: '24em' }} >
+                            <Typography variant='h6' noWrap sx={{ maxWidth: '24em' }} >
                                 {props.home} vs {props.away}
                             </Typography>  
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant='h6' color={'#E6E6E6'}>
+                            <Typography variant='h6'>
                                 {formatMatchDate(props.matchTime)}
                             </Typography>
                         </Grid>
@@ -85,10 +85,7 @@ export default function Match(props: MatchProps) {
                             <Button 
                                 variant='contained' 
                                 href={`https://twitch.tv/${props.twitch}`}
-                                sx={
-                                    {backgroundColor: '#808080',
-                                    '&:hover': { backgroundColor: '#9146FF' }}
-                                } 
+                                sx={{'&:hover': { backgroundColor: '#9146FF' }}} 
                                 startIcon={
                                     <SvgIcon sx={{ fontSize: '24px' }}>
                                         <TwitchIcon/>
