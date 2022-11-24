@@ -1,7 +1,6 @@
 import { Box, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { formatSchedule } from '../utils/schedule';
-import Match, { MatchProps } from './Match';
+import React from 'react';
+import Match from './Match';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { querySchedule } from '../utils/firebaseService';
 import { DocumentData } from 'firebase/firestore';
@@ -20,7 +19,7 @@ export default function Schedule() {
 
                 //TODO: Add sorting for the list (probably need to conver the types)
                 return(
-                    <Grid item xs={12}>
+                    <Grid item key={doc.matchTime.toString()} xs={12}>
                         <Match {...
                             {title: doc.title, 
                             home: doc.home, 
