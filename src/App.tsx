@@ -8,16 +8,15 @@ import Schedule from './components/Schedule';
 import { ThemeProvider } from '@mui/material/styles';
 import { defaultTheme } from './assets/theme';
 
-import { example } from './__tests__/testData';
-
 function App() {
+  console.log(Date.now() + 6 * 24 * 60 * 60 * 1000)
   return (
   <>
     <Helmet>
       <style>{`body { background-color: ${defaultTheme.palette.background.default}; }`}</style>
     </Helmet>
     <ThemeProvider theme={defaultTheme}>
-      <Schedule schedule={example.schedule}></Schedule>
+      <Schedule></Schedule>
     </ThemeProvider>
   </>);
 }

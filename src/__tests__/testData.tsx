@@ -1,19 +1,19 @@
-import { ScheduleProps } from "../components/Schedule";
+import { MatchProps } from "../components/Match";
 
-export const example: ScheduleProps = {schedule: [
+export const example: MatchProps[] = [
     {
       title: 'One Day Ago',
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
+      matchTime: Date.now() - 24 * 60 * 60 * 1000,
       game: 'other'
     },
     {
       title: 'Almost One Day Ago',
       home: 'Location',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() - 24 * 60 * 60 * 999),
+      matchTime: Date.now() - 24 * 60 * 60 * 999,
       game: 'other'
     },
     {
@@ -21,7 +21,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'rocketleague ',
-      matchTime: new Date(Date.now() - 60 * 59 * 1000),
+      matchTime: Date.now() - 60 * 59 * 1000,
       game: 'rocketleague'
     },
     {
@@ -29,7 +29,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() - 60 * 1000),
+      matchTime: Date.now() - 60 * 1000,
       game: 'fifa'
     },
     {
@@ -37,7 +37,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() + 60 * 1000),
+      matchTime: Date.now() + 60 * 1000,
       game: 'nba2k'
     },
     {
@@ -45,7 +45,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() + 60 * 60 * 1000),
+      matchTime: Date.now() + 60 * 60 * 1000,
       game: 'smashultimate'
     },
     {
@@ -53,7 +53,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'CollegeVALORANT',
-      matchTime: new Date(Date.now() - 60 * 60 * 1000),
+      matchTime: Date.now() - 60 * 60 * 1000,
       game: 'valorant'
     },
     {
@@ -61,7 +61,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'nacestarleague',
-      matchTime: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+      matchTime: Date.now() + 6 * 24 * 60 * 60 * 1000,
       game: 'leagueoflegends'
     }
     ,
@@ -70,7 +70,7 @@ export const example: ScheduleProps = {schedule: [
       home: 'Home Team',
       away: 'Away Team',
       twitch: 'radfordesports',
-      matchTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      matchTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
       game: 'other'
     }
-  ]};
+  ];

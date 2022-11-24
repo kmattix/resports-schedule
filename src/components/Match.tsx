@@ -9,11 +9,12 @@ export type MatchProps = {
     home: string,
     away?: string,
     twitch: string,
-    matchTime: Date,
+    matchTime: number,
     game: 'rocketleague' | 'valorant' | 'leagueoflegends' | 'smashultimate' | 'fifa' | 'nba2k' | 'other'
 }
 
 export default function Match(props: MatchProps) {
+
   return (
     <Card>
         <CardContent>
@@ -32,7 +33,7 @@ export default function Match(props: MatchProps) {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant='h6'>
-                                {formatMatchDate(props.matchTime)}
+                                {formatMatchDate(new Date(props.matchTime))}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} marginTop={1}>

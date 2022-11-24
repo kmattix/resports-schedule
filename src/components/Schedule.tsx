@@ -1,14 +1,14 @@
 import { Box, Grid } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { formatSchedule } from '../utils/schedule';
 import Match, { MatchProps } from './Match';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { querySchedule } from '../utils/firebaseService';
+import { DocumentData } from 'firebase/firestore';
 
-export type ScheduleProps = {
-    schedule: MatchProps[]
-}
-
-export default function Schedule(props: ScheduleProps) {
-    const schedule = formatSchedule(props.schedule); 
+export default function Schedule() {
+    
+    const [documents, loading, error] = useCollectionData(querySchedule());
 
   return (
     <Box
@@ -16,12 +16,22 @@ export default function Schedule(props: ScheduleProps) {
         justifyContent="center"
         alignItems="top">
         <Grid container rowSpacing={2} sx={{ maxWidth: '650px' }}>
-            {schedule.map(match => {
+            {documents && documents.map((doc: DocumentData) => {
+
+                //TODO: Add sorting for the list (probably need to conver the types)
                 return(
-                <Grid item key={match.matchTime.getTime().toString()} xs={12}>
-                    <Match {...match}></Match>
-                </Grid>);
+                    <Grid item xs={12}>
+                        <Match {...
+                            {title: doc.title, 
+                            home: doc.home, 
+                            away: doc.away, 
+                            twitch: doc.twitch, 
+                            matchTime: doc.matchTime, 
+                            game: doc.game}}></Match>
+                    </Grid>
+                );
             })}
+            
         </Grid>
     </Box>
   );
