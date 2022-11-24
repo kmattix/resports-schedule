@@ -9,7 +9,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import { defaultTheme } from './assets/theme';
 
 function App() {
-  console.log(Date.now() + 6 * 24 * 60 * 60 * 1000)
   return (
   <>
     <Helmet>
