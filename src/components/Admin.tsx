@@ -6,6 +6,9 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import resportsLogo from '../assets/logo192.png';
 import { addMatch } from '../utils/firebaseService';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -24,6 +27,7 @@ const validationSchema = yup.object({
 
 export default function Admin() {
     const navigate = useNavigate();
+    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(dayjs());
     const [submitting, setSubmitting] = useState(false);
 
     const formik = useFormik({
@@ -48,6 +52,7 @@ export default function Admin() {
             })
             .then(() => {
                 formik.resetForm();
+                setMatchTimeVal(dayjs())
                 setSubmitting(false);
             }, () => setSubmitting(false));
         }
@@ -115,16 +120,26 @@ export default function Admin() {
                                     error={formik.touched.away && Boolean(formik.errors.away)}
                                     helperText={formik.touched.away && formik.errors.away}/>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    id='matchTime'
-                                    name='matchTime'
-                                    label='Match Time Placeholder'
-                                    value={formik.values.matchTime}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
-                                    helperText={formik.touched.matchTime && formik.errors.matchTime}/>
+                            <Grid item xs={12}> 
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                        label='Match Time'
+                                        renderInput={(props: any) => 
+                                            <TextField 
+                                                fullWidth 
+                                                id='matchTime' 
+                                                name='matchTime'
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
+                                                helperText={formik.touched.matchTime && formik.errors.matchTime}
+                                                {...props}/>}
+                                        value={matchTimeVal}
+                                        onChange={(newVal) => {
+                                            setMatchTimeVal(newVal);
+                                            //not properly converting the minutes
+                                            if(matchTimeVal !== null) formik.values.matchTime = matchTimeVal.toDate().getTime();
+                                        }}/>
+                            </LocalizationProvider>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -153,7 +168,7 @@ export default function Admin() {
                                     <MenuItem value="leagueoflegends">League of Legends</MenuItem>
                                     <MenuItem value="smashultimate">Smash Ultimate</MenuItem>
                                     <MenuItem value="fifa">FIFA</MenuItem>
-                                    <MenuItem value="fifa">NBA2k</MenuItem>
+                                    <MenuItem value="nba2k">NBA2k</MenuItem>
                                     <MenuItem value="other">Other</MenuItem>
                                 </TextField>
                             </Grid>

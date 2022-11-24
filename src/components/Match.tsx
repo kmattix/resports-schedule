@@ -33,7 +33,7 @@ export default function Match(props: MatchProps) {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant='h6'>
-                                {formatMatchDate(new Date(props.matchTime))}
+                                {formatMatchDate(props.matchTime)}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} marginTop={1}>

@@ -1,4 +1,5 @@
-export const formatMatchDate = (d: Date): string => {
+export const formatMatchDate = (n: number): string => {
+    const d = new Date(n);
     const msLeftInWeek = 6 * 24 * 60 * 60 * 1000;
     let day = '';
 
