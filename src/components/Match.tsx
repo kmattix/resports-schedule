@@ -50,7 +50,7 @@ export default function Match(props: MatchProps) {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Grid item xs={2} paddingRight={'1vw'} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <GameIcon game={props.game}/>
                 </Grid>
             </Grid>
