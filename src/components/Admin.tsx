@@ -1,41 +1,56 @@
-import { Box, Button, Card, CardContent, Divider, Grid, IconButton, MenuItem, TextField, Typography } from '@mui/material';
-import React  from 'react';
+import { Box, Card, CardContent, Divider, Grid, IconButton, MenuItem, TextField, Typography } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import React, { useState }  from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import resportsLogo from '../assets/logo192.png';
+import { addMatch } from '../utils/firebaseService';
 
 const validationSchema = yup.object({
     title: yup.string()
-        .required('Title is required'),
+        .required('Match title is required'),
     home: yup.string()
         .required('Home team name is required'),
     away: yup.string(),
     matchTime: yup.number()
         .required('Match time is required'),
     twitch: yup.string()
-        .min(3, 'Twitch username must be of minimum 8 characters length')
-        .max(25, 'Twitch username cannot be more than 25 characters length')
+        .min(4, 'Twitch usernames must be at least 4 characters')
+        .max(25, 'Twitch usernames cannot be more than 25 characters ')
         .required('Twitch username is required'),
     game: yup.string()
 })
 
 export default function Admin() {
     const navigate = useNavigate();
+    const [submitting, setSubmitting] = useState(false);
 
     const formik = useFormik({
         initialValues: {
             title: '',
             home: '',
             away: '',
-            matchTime: undefined,
+            matchTime: Date.now(),
             twitch: '',
             game: 'other'
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
-        },
+            setSubmitting(true);
+            addMatch({
+                title: values.title,
+                home: values.home,
+                away: values.away,
+                matchTime: values.matchTime,
+                twitch: values.twitch,
+                game: values.game
+            })
+            .then(() => {
+                formik.resetForm();
+                setSubmitting(false);
+            }, () => setSubmitting(false));
+        }
     });
 
   return (<>
@@ -94,7 +109,7 @@ export default function Admin() {
                                     fullWidth
                                     id='away'
                                     name='away'
-                                    label='Away?'
+                                    label='Away (optional)'
                                     value={formik.values.away}
                                     onChange={formik.handleChange}
                                     error={formik.touched.away && Boolean(formik.errors.away)}
@@ -143,7 +158,7 @@ export default function Admin() {
                                 </TextField>
                             </Grid>
                             <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
-                                <Button fullWidth variant='contained' color='success' type='submit'>Submit</Button>
+                                <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Submit</LoadingButton>
                             </Grid>
                         </Grid>
                     </form>

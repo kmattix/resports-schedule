@@ -10,7 +10,7 @@ export type MatchProps = {
     away?: string,
     twitch: string,
     matchTime: number,
-    game: 'rocketleague' | 'valorant' | 'leagueoflegends' | 'smashultimate' | 'fifa' | 'nba2k' | 'other'
+    game: string
 }
 
 export default function Match(props: MatchProps) {
