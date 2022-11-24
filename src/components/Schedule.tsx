@@ -1,13 +1,30 @@
 import { Box, Grid } from '@mui/material';
-import React from 'react';
-import Match from './Match';
+import React, { useEffect, useState } from 'react';
+import Match, { MatchProps } from './Match';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { querySchedule } from '../utils/firebaseService';
 import { DocumentData } from 'firebase/firestore';
+import { formatSchedule } from '../utils/schedule';
 
 export default function Schedule() {
     
     const [documents, loading, error] = useCollectionData(querySchedule());
+    const [schedule, setSchedule] = useState<MatchProps[]>([]);
+
+    useEffect(() => {
+        let newSchedule: MatchProps[] = [];
+        documents && documents.map((doc: DocumentData) => {
+            newSchedule.push({
+                    title: doc.title,
+                    home: doc.home,
+                    away: doc.away,
+                    matchTime: doc.matchTime,
+                    twitch: doc.twitch,
+                    game: doc.game
+                });
+            });
+        setSchedule(formatSchedule(newSchedule));
+    }, [documents]);
 
   return (
     <Box
@@ -15,18 +32,10 @@ export default function Schedule() {
         justifyContent="center"
         alignItems="top">
         <Grid container rowSpacing={2} sx={{ maxWidth: '650px' }}>
-            {documents && documents.map((doc: DocumentData) => {
-
-                //TODO: Add sorting for the list (probably need to conver the types)
+            {schedule.map((match: MatchProps) => {
                 return(
-                    <Grid item key={doc.matchTime.toString()} xs={12}>
-                        <Match {...
-                            {title: doc.title, 
-                            home: doc.home, 
-                            away: doc.away, 
-                            twitch: doc.twitch, 
-                            matchTime: doc.matchTime, 
-                            game: doc.game}}></Match>
+                    <Grid item key={match.matchTime.toString()} xs={12}>
+                        <Match {... match}></Match>
                     </Grid>
                 );
             })}
