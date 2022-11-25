@@ -54,6 +54,5 @@ export default function Schedule() {
                 }
             </Grid>
         }
-    </Box>
-  );
+    </Box>);
 }

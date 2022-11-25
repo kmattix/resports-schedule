@@ -12,8 +12,7 @@ import Admin from './components/Admin';
 import SignIn from './components/SignIn';
 
 function App() {
-  return (
-  <>
+  return (<>
     <Helmet>
       <style>{`body { background-color: ${defaultTheme.palette.background.default}; }`}</style>
     </Helmet>

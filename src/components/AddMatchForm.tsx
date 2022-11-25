@@ -66,106 +66,107 @@ export default function AddMatchForm() {
         }
     });
 
-    return (<Card>
-                <CardContent>
-                    <form onSubmit={formik.handleSubmit}>
-                        <Grid container rowSpacing={2} columnSpacing={1} maxWidth={'50vw'}>
-                            <Grid item xs={12}>
-                                <Typography variant={'h5'}>Add Match</Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Divider></Divider>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    id='title'
-                                    name='title'
-                                    label='Match Title'
-                                    value={formik.values.title}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.title && Boolean(formik.errors.title)}
-                                    helperText={formik.touched.title && formik.errors.title}/>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    id='home'
-                                    name='home'
-                                    label='Home'
-                                    value={formik.values.home}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.home && Boolean(formik.errors.home)}
-                                    helperText={formik.touched.home && formik.errors.home}/>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    id='away'
-                                    name='away'
-                                    label='Away (optional)'
-                                    value={formik.values.away}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.away && Boolean(formik.errors.away)}
-                                    helperText={formik.touched.away && formik.errors.away}/>
-                            </Grid>
-                            <Grid item xs={12}> 
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateTimePicker
-                                        label='Match Time'
-                                        minDateTime={dayjs().subtract(1, 'hour')}
-                                        maxDateTime={dayjs().add(1, 'year')}
-                                        ampm={false}
-                                        renderInput={(props: any) => 
-                                            <TextField 
-                                                fullWidth 
-                                                id='matchTime' 
-                                                name='matchTime'
-                                                onChange={formik.handleChange}
-                                                error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
-                                                {...props}/>}
-                                        value={matchTimeVal}
-                                        onChange={(value) => {
-                                            handleMatchTimeChange(value);
-                                        }}/>
-                            </LocalizationProvider>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    id='twitch'
-                                    name='twitch'
-                                    label='Twitch Account'
-                                    value={formik.values.twitch}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.twitch && Boolean(formik.errors.twitch)}
-                                    helperText={formik.touched.twitch && formik.errors.twitch}/>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    id='game'
-                                    select
-                                    name='game'
-                                    label='Game'
-                                    value={formik.values.game}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.game && Boolean(formik.errors.game)}
-                                    helperText={formik.touched.game && formik.errors.game}>
-                                    <MenuItem value="rocketleague">Rocket League</MenuItem>
-                                    <MenuItem value="valorant">Valorant</MenuItem>
-                                    <MenuItem value="leagueoflegends">League of Legends</MenuItem>
-                                    <MenuItem value="smashultimate">Smash Ultimate</MenuItem>
-                                    <MenuItem value="fifa">FIFA</MenuItem>
-                                    <MenuItem value="nba2k">NBA2k</MenuItem>
-                                    <MenuItem value="other">Other</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
-                                <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Submit</LoadingButton>
-                            </Grid>
+    return (
+        <Card>
+            <CardContent>
+                <form onSubmit={formik.handleSubmit}>
+                    <Grid container rowSpacing={2} columnSpacing={1} maxWidth={'50vw'}>
+                        <Grid item xs={12}>
+                            <Typography variant={'h5'}>Add Match</Typography>
                         </Grid>
-                    </form>
-                </CardContent>
-            </Card>);
+                        <Grid item xs={12}>
+                            <Divider></Divider>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id='title'
+                                name='title'
+                                label='Match Title'
+                                value={formik.values.title}
+                                onChange={formik.handleChange}
+                                error={formik.touched.title && Boolean(formik.errors.title)}
+                                helperText={formik.touched.title && formik.errors.title}/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id='home'
+                                name='home'
+                                label='Home'
+                                value={formik.values.home}
+                                onChange={formik.handleChange}
+                                error={formik.touched.home && Boolean(formik.errors.home)}
+                                helperText={formik.touched.home && formik.errors.home}/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id='away'
+                                name='away'
+                                label='Away (optional)'
+                                value={formik.values.away}
+                                onChange={formik.handleChange}
+                                error={formik.touched.away && Boolean(formik.errors.away)}
+                                helperText={formik.touched.away && formik.errors.away}/>
+                        </Grid>
+                        <Grid item xs={12}> 
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateTimePicker
+                                    label='Match Time'
+                                    minDateTime={dayjs().subtract(1, 'hour')}
+                                    maxDateTime={dayjs().add(1, 'year')}
+                                    ampm={false}
+                                    renderInput={(props: any) => 
+                                        <TextField 
+                                            fullWidth 
+                                            id='matchTime' 
+                                            name='matchTime'
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
+                                            {...props}/>}
+                                    value={matchTimeVal}
+                                    onChange={(value) => {
+                                        handleMatchTimeChange(value);
+                                    }}/>
+                        </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id='twitch'
+                                name='twitch'
+                                label='Twitch Account'
+                                value={formik.values.twitch}
+                                onChange={formik.handleChange}
+                                error={formik.touched.twitch && Boolean(formik.errors.twitch)}
+                                helperText={formik.touched.twitch && formik.errors.twitch}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id='game'
+                                select
+                                name='game'
+                                label='Game'
+                                value={formik.values.game}
+                                onChange={formik.handleChange}
+                                error={formik.touched.game && Boolean(formik.errors.game)}
+                                helperText={formik.touched.game && formik.errors.game}>
+                                <MenuItem value="rocketleague">Rocket League</MenuItem>
+                                <MenuItem value="valorant">Valorant</MenuItem>
+                                <MenuItem value="leagueoflegends">League of Legends</MenuItem>
+                                <MenuItem value="smashultimate">Smash Ultimate</MenuItem>
+                                <MenuItem value="fifa">FIFA</MenuItem>
+                                <MenuItem value="nba2k">NBA2k</MenuItem>
+                                <MenuItem value="other">Other</MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
+                            <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Submit</LoadingButton>
+                        </Grid>
+                    </Grid>
+                </form>
+            </CardContent>
+        </Card>);
 }

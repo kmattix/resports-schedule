@@ -10,29 +10,28 @@ export default function Admin() {
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
     
-    return(
-        <>
-            {user ? <>
-                <IconButton onClick={() => navigate('/')}>
-                    <Box
-                    component={'img'}
-                    sx={{
-                        maxHeight: 50,
-                        maxWidth: 50,
-                        backgroundColor: 'white',
-                        borderRadius: '50%',
-                        padding: '2px',
-                    }}
-                    alt={'Schedule'}
-                    src={resportsLogo}/>
-                </IconButton>
+    return(<>
+        {user ? <>
+            <IconButton onClick={() => navigate('/')}>
                 <Box
-                display='flex'
-                justifyContent='center'
-                alignItems='top'>
-                    <AddMatchForm/>
-                </Box>
-            </> :
-            navigate('/sign-in')}
-        </>);
+                component={'img'}
+                sx={{
+                    maxHeight: 50,
+                    maxWidth: 50,
+                    backgroundColor: 'white',
+                    borderRadius: '50%',
+                    padding: '2px',
+                }}
+                alt={'Schedule'}
+                src={resportsLogo}/>
+            </IconButton>
+            <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='top'>
+                <AddMatchForm/>
+            </Box>
+        </> :
+        navigate('/sign-in')}
+    </>);
 }
