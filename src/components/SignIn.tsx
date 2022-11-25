@@ -5,10 +5,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { auth } from '../utils/firebaseService';
-import Admin from './Admin';
 
 const validationSchema = yup.object({
     email: yup.string()
