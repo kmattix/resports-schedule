@@ -15,8 +15,10 @@ const validationSchema = yup.object({
         .required('Match title is required')
         .max(25, 'Title may be too long'),
     home: yup.string()
-        .required('Home team name is required'),
-    away: yup.string(),
+        .required('Home team name is required')
+        .max(25, 'Name may be too long'),
+    away: yup.string()
+        .max(25, 'Name may be too long'),
     matchTime: yup.number()
         .required(),
     twitch: yup.string()
