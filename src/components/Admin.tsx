@@ -17,7 +17,7 @@ const validationSchema = yup.object({
         .required('Home team name is required'),
     away: yup.string(),
     matchTime: yup.number()
-        .required('Match time is required'),
+        .required(),
     twitch: yup.string()
         .min(4, 'Twitch usernames must be at least 4 characters')
         .max(25, 'Twitch usernames cannot be more than 25 characters ')
@@ -27,21 +27,29 @@ const validationSchema = yup.object({
 
 export default function Admin() {
     const navigate = useNavigate();
-    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(dayjs());
     const [submitting, setSubmitting] = useState(false);
+
+    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(dayjs(),);
+    const handleMatchTimeChange = (newValue: Dayjs | null) => {
+        setMatchTimeVal(newValue);
+        if(newValue !== null) formik.values.matchTime = newValue.unix();
+      };
 
     const formik = useFormik({
         initialValues: {
             title: '',
             home: '',
             away: '',
-            matchTime: Date.now(),
+            matchTime: dayjs().unix(),
             twitch: '',
             game: 'other'
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
             setSubmitting(true);
+
+            console.log(matchTimeVal?.format())
+
             addMatch({
                 title: values.title,
                 home: values.home,
@@ -124,6 +132,8 @@ export default function Admin() {
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateTimePicker
                                         label='Match Time'
+                                        minDateTime={dayjs().subtract(1, 'hour')}
+                                        maxDateTime={dayjs().add(1, 'year')}
                                         renderInput={(props: any) => 
                                             <TextField 
                                                 fullWidth 
@@ -134,10 +144,8 @@ export default function Admin() {
                                                 helperText={formik.touched.matchTime && formik.errors.matchTime}
                                                 {...props}/>}
                                         value={matchTimeVal}
-                                        onChange={(newVal) => {
-                                            setMatchTimeVal(newVal);
-                                            //not properly converting the minutes
-                                            if(matchTimeVal !== null) formik.values.matchTime = matchTimeVal.toDate().getTime();
+                                        onChange={(value) => {
+                                            handleMatchTimeChange(value);
                                         }}/>
                             </LocalizationProvider>
                             </Grid>

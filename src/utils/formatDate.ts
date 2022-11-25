@@ -1,22 +1,23 @@
+import dayjs from 'dayjs';
+
 export const formatMatchDate = (n: number): string => {
-    const d = new Date(n);
-    const msLeftInWeek = 6 * 24 * 60 * 60 * 1000;
+    const d = dayjs.unix(n);
     let day = '';
 
-    if (d.getTime() < Date.now() - 60 * 60 * 1000){
+    if (d.unix() < dayjs().subtract(1, 'hour').unix()){
         return 'Completed';
     }
     
-    if(d.getTime() < Date.now()){
+    if(d.unix() < dayjs().unix()){
         return 'Live Now';
     }
 
-    if(Date.now() + msLeftInWeek > d.getTime()){
-        if(d.getDay() === new Date().getDay()){
+    if(dayjs().add(6, 'day').unix() > d.unix()){
+        if(d.day() === dayjs().day()){
             day = 'Today';
         } 
         else{
-            switch(d.getDay()){
+            switch(d.day()){
                 case 0:
                     day = 'Sunday';
                     break;
@@ -42,11 +43,11 @@ export const formatMatchDate = (n: number): string => {
         }  
     }
     else {
-        day = `${d.getMonth() + 1}/${d.getDate()}`;
+        day = `${d.month() + 1}/${d.date()}`;
     }
 
-    let hours = d.getHours();
-    let minutes = d.getMinutes();
+    let hours = d.hour();
+    let minutes = d.minute();
     let ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12;
