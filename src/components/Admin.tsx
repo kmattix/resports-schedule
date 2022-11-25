@@ -11,7 +11,6 @@ export default function Admin() {
     const [user] = useAuthState(auth);
     
     return(
-
         <>
             {user ? <>
                 <IconButton onClick={() => navigate('/')}>
