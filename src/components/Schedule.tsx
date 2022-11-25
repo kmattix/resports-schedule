@@ -34,7 +34,7 @@ export default function Schedule() {
         {
             loading ? <CircularProgress/> :
 
-            <Grid container rowSpacing={2} sx={{ minWidth: '500px', maxWidth: '45vw' }}>
+            <Grid container rowSpacing={2} sx={{ minWidth: '500px', maxWidth: '50rem' }}>
                 {             
                     schedule.length ? 
 
