@@ -8,7 +8,7 @@ import { formatSchedule } from '../utils/schedule';
 
 export default function Schedule() {
     
-    const [documents, loading, error] = useCollectionData(querySchedule());
+    const [documents, loading] = useCollectionData(querySchedule());
     const [schedule, setSchedule] = useState<MatchProps[]>([]);
 
     useEffect(() => {

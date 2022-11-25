@@ -3,7 +3,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import React from 'react';
-import { Routes, Route, Outlet, Link, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Schedule from './components/Schedule';
 import { ThemeProvider } from '@mui/material/styles';
