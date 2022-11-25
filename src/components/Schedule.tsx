@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -32,7 +32,13 @@ export default function Schedule() {
         justifyContent="center"
         alignItems="top">
         <Grid container rowSpacing={2} sx={{ maxWidth: '650px' }}>
-            {schedule.map((match: MatchProps) => {
+            {!schedule.length ? 
+            <Grid item xs={12}>
+                <Typography variant='h4' color='text.disabled' display='flex' justifyContent='center' margin={'5vh'}>
+                    No upcoming matches...
+                </Typography>
+            </Grid> :
+            schedule.map((match: MatchProps) => {
                 return(
                     <Grid item key={match.matchTime.toString()} xs={12}>
                         <Match {... match}></Match>
