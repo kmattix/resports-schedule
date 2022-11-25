@@ -41,10 +41,9 @@ export default function GameIcon({ game }: GameIconProps) {
     }
 
     return ((image === 'other') ? 
-    <VideogameAssetIcon sx={{ fontSize: '110px', color: '#FFFFFF', marginRight: '10px'}}/> : 
+    <VideogameAssetIcon sx={{ fontSize: '110px', color: '#FFFFFF'}}/> : 
     <Box
         component={'img'}
-        marginRight={'10px'}
         sx={{
             maxHeight: 100,
             maxWidth: 100

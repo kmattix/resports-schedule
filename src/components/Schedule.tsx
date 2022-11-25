@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -28,25 +28,32 @@ export default function Schedule() {
 
   return (
     <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="top">
-        <Grid container rowSpacing={2} sx={{ maxWidth: '650px' }}>
-            {!schedule.length ? 
-            <Grid item xs={12}>
-                <Typography variant='h4' color='text.disabled' display='flex' justifyContent='center' margin={'5vh'}>
-                    No upcoming matches...
-                </Typography>
-            </Grid> :
-            schedule.map((match: MatchProps) => {
-                return(
-                    <Grid item key={match.matchTime.toString()} xs={12}>
-                        <Match {... match}></Match>
+        display='flex'
+        justifyContent='center'
+        alignItems='top'>
+        {
+            loading ? <CircularProgress/> :
+
+            <Grid container rowSpacing={2} sx={{ minWidth: '500px', maxWidth: '45vw' }}>
+                {             
+                    schedule.length ? 
+
+                    schedule.map((match: MatchProps) => {
+                        return(
+                            <Grid item key={match.matchTime.toString()} xs={12}>
+                                <Match {... match}></Match>
+                            </Grid>
+                        );
+                    }) :
+
+                    <Grid item xs={12}>
+                        <Typography variant='h4' color='text.disabled' display='flex' justifyContent='center' margin={'5vh'}>
+                            No upcoming matches...
+                        </Typography>
                     </Grid>
-                );
-            })}
-            
-        </Grid>
+                }
+            </Grid>
+        }
     </Box>
   );
 }

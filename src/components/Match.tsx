@@ -18,16 +18,16 @@ export default function Match(props: MatchProps) {
   return (
     <Card>
         <CardContent>
-            <Grid container>
+            <Grid container paddingRight={2}>
                 <Grid item xs={10}>
-                    <Grid container>
+                    <Grid container paddingRight={2}>
                         <Grid item xs={12}>
-                            <Typography variant='h4' color={'text.secondary'} noWrap sx={{ maxWidth: '14em' }}>
+                            <Typography variant='h4' color={'text.secondary'} noWrap>
                                 {props.title}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant='h6' noWrap sx={{ maxWidth: '24em' }} >
+                            <Typography variant='h6' noWrap>
                                 {props.home}{props.away ? ` vs ${props.away}` : ''}
                             </Typography>  
                         </Grid>
@@ -40,7 +40,7 @@ export default function Match(props: MatchProps) {
                             <Button 
                                 variant='contained' 
                                 href={`https://twitch.tv/${props.twitch}`}
-                                sx={{'&:hover': { backgroundColor: '#9146FF' }}} 
+                                sx={{ maxWidth: '95%', '&:hover': { backgroundColor: '#9146FF' }}} 
                                 startIcon={
                                     <SvgIcon sx={{ fontSize: '24px' }}>
                                         <TwitchIcon/>
@@ -50,7 +50,7 @@ export default function Match(props: MatchProps) {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={2} paddingRight={'1vw'} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <GameIcon game={props.game}/>
                 </Grid>
             </Grid>

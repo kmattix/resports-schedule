@@ -12,7 +12,8 @@ import dayjs, { Dayjs } from 'dayjs';
 
 const validationSchema = yup.object({
     title: yup.string()
-        .required('Match title is required'),
+        .required('Match title is required')
+        .max(25, 'Title may be too long'),
     home: yup.string()
         .required('Home team name is required'),
     away: yup.string(),
