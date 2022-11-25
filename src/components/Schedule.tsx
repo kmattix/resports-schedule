@@ -13,7 +13,7 @@ export default function Schedule() {
 
     useEffect(() => {
         let newSchedule: MatchProps[] = [];
-        documents && documents.map((doc: DocumentData) => {
+        documents && documents.forEach((doc: DocumentData) => {
             newSchedule.push({
                     title: doc.title,
                     home: doc.home,
