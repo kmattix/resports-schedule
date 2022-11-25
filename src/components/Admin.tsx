@@ -137,6 +137,7 @@ export default function Admin() {
                                         label='Match Time'
                                         minDateTime={dayjs().subtract(1, 'hour')}
                                         maxDateTime={dayjs().add(1, 'year')}
+                                        ampm={false}
                                         renderInput={(props: any) => 
                                             <TextField 
                                                 fullWidth 
@@ -144,7 +145,6 @@ export default function Admin() {
                                                 name='matchTime'
                                                 onChange={formik.handleChange}
                                                 error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
-                                                helperText={formik.touched.matchTime && formik.errors.matchTime}
                                                 {...props}/>}
                                         value={matchTimeVal}
                                         onChange={(value) => {
