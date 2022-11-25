@@ -61,7 +61,7 @@ export default function SignIn() {
         <Card>
             <CardContent>
                 <form onSubmit={formik.handleSubmit}>
-                    <Grid container rowSpacing={2} columnSpacing={1} maxWidth={'20vw'}>
+                    <Grid container rowSpacing={2} columnSpacing={1} minWidth={'300px'} maxWidth={'20vw'}>
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>Admin Login</Typography>
                         </Grid>
