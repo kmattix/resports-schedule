@@ -9,6 +9,7 @@ import Schedule from './components/Schedule';
 import { ThemeProvider } from '@mui/material/styles';
 import { defaultTheme } from './assets/theme';
 import Admin from './components/Admin';
+import SignIn from './components/SignIn';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Schedule/>}/>
           <Route path='/admin' element={<Admin/>}/>
+          <Route path='/sign-in' element={<SignIn/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

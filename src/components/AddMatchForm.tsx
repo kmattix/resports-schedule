@@ -24,7 +24,7 @@ const validationSchema = yup.object({
         .max(25, 'Twitch usernames cannot be more than 25 characters ')
         .required('Twitch username is required'),
     game: yup.string()
-})
+});
 
 export default function AddMatchForm() {
     const [submitting, setSubmitting] = useState(false);
