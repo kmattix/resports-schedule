@@ -70,7 +70,7 @@ export default function AddMatchForm() {
         <Card>
             <CardContent>
                 <form onSubmit={formik.handleSubmit}>
-                    <Grid container rowSpacing={2} columnSpacing={1} maxWidth={'50vw'}>
+                    <Grid container rowSpacing={2} columnSpacing={1} minWidth={'450px'} maxWidth={'50vw'}>
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>Add Match</Typography>
                         </Grid>
