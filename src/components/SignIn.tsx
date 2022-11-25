@@ -107,11 +107,13 @@ export default function SignIn() {
                                 </FormHelperText>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
-                            <Typography color='error' sx={{ visibility: errorMessage ? 'visible' : 'hidden' }}>Email or password is incorrect</Typography>
-                        </Grid>
-                        <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
-                            <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Sign In</LoadingButton>
+                        <Grid container item display='flex' justifyContent='center' alignItems='center' rowSpacing={1} xs={12}>
+                            <Grid item xs={12}>
+                                <Typography color='error' sx={{ visibility: errorMessage ? 'visible' : 'hidden' }}>Email or password is incorrect</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Sign In</LoadingButton>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </form>
