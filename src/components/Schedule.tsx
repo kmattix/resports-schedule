@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Divider, Grid, Typography } from '@mui/material';
+import { Box, CircularProgress, Divider, Grid, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -6,7 +6,7 @@ import { querySchedule } from '../utils/firebaseService';
 import { DocumentData } from 'firebase/firestore';
 import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
-import resportsLogo from '../assets/logo192.png';
+import resportslogo from '../assets/logo4231.png';
 
 export default function Schedule() {
     
@@ -41,21 +41,15 @@ export default function Schedule() {
 
             <Grid container rowSpacing={2} paddingTop={1} sx={{ maxWidth: '40rem' }}>
                 <Grid item xs={12} display='flex' justifyContent='center' alignItems='top'>
-                    <Button variant='text' size='large' onClick={() => {navigate('/admin')}} startIcon={
+                    <IconButton size='large' onClick={() => {navigate('/admin')}}>
                         <Box
                         component={'img'}
                         sx={{
-                            maxHeight: 50,
-                            maxWidth: 50
+                            maxWidth: 250
                         }}
-                        alt={'Schedule'}
-                        src={resportsLogo}/>
-                    }>
-                        <Typography variant='h4' color='text.primary'>
-                             | Esports
-                        </Typography>
-                        
-                    </Button>
+                        alt={'Radford Esports'}
+                        src={resportslogo}/>
+                    </IconButton>
                 </Grid>
 
                 <Grid item xs={12}>
