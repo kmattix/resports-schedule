@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import React  from 'react';
 import { useNavigate } from 'react-router-dom';
 import resportsLogo from '../assets/logo192.png';
@@ -12,19 +12,21 @@ export default function Admin() {
     
     return(<>
         {user ? <>
-            <IconButton onClick={() => navigate('/')}>
-                <Box
-                component={'img'}
-                sx={{
-                    maxHeight: 50,
-                    maxWidth: 50,
-                    backgroundColor: 'white',
-                    borderRadius: '50%',
-                    padding: '2px',
-                }}
-                alt={'Schedule'}
-                src={resportsLogo}/>
-            </IconButton>
+            <Tooltip title='Schedule'>
+                <IconButton onClick={() => navigate('/')}>
+                    <Box
+                    component={'img'}
+                    sx={{
+                        maxHeight: 50,
+                        maxWidth: 50,
+                        backgroundColor: 'white',
+                        borderRadius: '50%',
+                        padding: '2px',
+                    }}
+                    alt={'Schedule'}
+                    src={resportsLogo}/>
+                </IconButton>
+            </Tooltip>
             <Box
             display='flex'
             justifyContent='center'
