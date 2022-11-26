@@ -3,7 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import React, { useState }  from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { addMatch, modifyMatch } from '../utils/firebaseService';
+import { addMatch, modifyMatch, removeMatch } from '../utils/firebaseService';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
@@ -63,8 +63,6 @@ export default function MatchForm(props: MatchFormProps) {
         onSubmit: (values) => {
             setSubmitting(true);
 
-            console.log(matchTimeVal?.format())
-
             const match: MatchProps = {
                 title: values.title,
                 home: values.home,
@@ -85,8 +83,11 @@ export default function MatchForm(props: MatchFormProps) {
     });
 
     const handleDelete = () => {
-        alert('Delete')
-        resetForm();
+        setSubmitting(true);
+        
+        props.modify && props.modify.id && removeMatch(props.modify.id).then(() => {
+            resetForm();
+        }, () => setSubmitting(false));
     }
 
     return (

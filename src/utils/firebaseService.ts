@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { addDoc, deleteDoc, doc, getFirestore, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { firebaseConfig } from '../firebase.config';
 import { collection, query } from 'firebase/firestore';
@@ -18,6 +18,10 @@ export const querySchedule = () => {
 
 export const addMatch = async (match: MatchProps) => {
     await addDoc(collection(db, 'schedule'), match);
+}
+
+export const removeMatch = async (id: string) => {
+    await deleteDoc(doc(db, 'schedule', id));
 }
 
 export const modifyMatch = async (id: string, match: MatchProps) => {

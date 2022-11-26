@@ -70,7 +70,7 @@ export default function Admin() {
             display='flex'
             justifyContent='center'
             alignItems='top'>
-                <MatchForm minWidth='300px' maxWidth='40vw'/>
+                <MatchForm maxWidth='40rem'/>
             </Box>
         </> :
         navigate('/sign-in')}
