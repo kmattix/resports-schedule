@@ -40,7 +40,7 @@ export default function Match(props: MatchProps) {
                             <Button 
                                 variant='contained' 
                                 href={`https://twitch.tv/${props.twitch}`}
-                                sx={{ maxWidth: '95%', '&:hover': { backgroundColor: '#9146FF' }}} 
+                                sx={{ textTransform:'none', maxWidth: '95%', '&:hover': { backgroundColor: '#9146FF' }}} 
                                 startIcon={
                                     <SvgIcon sx={{ fontSize: '24px' }}>
                                         <TwitchIcon/>
