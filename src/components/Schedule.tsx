@@ -1,9 +1,9 @@
 import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { auth, querySchedule } from '../utils/firebaseService';
-import { DocumentData } from 'firebase/firestore';
+import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
 import resportslogo from '../assets/logo4231.png';
@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Schedule() {
     
-    const [documents, loading] = useCollectionData(querySchedule());
+    const [snapshot, loading] = useCollection(querySchedule());
     const [user] = useAuthState(auth);
 
     const navigate = useNavigate();
@@ -20,27 +20,29 @@ export default function Schedule() {
 
     useEffect(() => {
         let newSchedule: MatchProps[] = [];
-        documents && documents.forEach((doc: DocumentData) => {
+        snapshot && snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
             newSchedule.push({
-                    title: doc.title,
-                    home: doc.home,
-                    away: doc.away,
-                    matchTime: doc.matchTime,
-                    twitch: doc.twitch,
-                    game: doc.game
+                    id: doc.id,
+                    title: doc.data().title,
+                    home: doc.data().home,
+                    away: doc.data().away,
+                    matchTime: doc.data().matchTime,
+                    twitch: doc.data().twitch,
+                    game: doc.data().game
                 });
             });
         setSchedule(formatSchedule(newSchedule));
-    }, [documents]);
+    }, [snapshot]);
 
   return (
+    <>
     <Box
         display='flex'
         justifyContent='center'
         alignItems='top'>
         <Grid container rowSpacing={1} sx={{ maxWidth: '40rem' }}>
             <Grid item xs={12} display='flex' justifyContent='center'>
-                <Tooltip title= {user ? 'Admin controls' : 'Admin login'}>
+                <Tooltip title= {user ? 'Admin page' : 'Admin login'} arrow>
                     <Button size='large' onClick={() => {navigate('/admin')}}>
                         <Box
                         component={'img'}
@@ -49,7 +51,7 @@ export default function Schedule() {
                         }}
                         alt={'Radford Esports'}
                         src={resportslogo}/>
-                </Button>
+                    </Button>
                 </Tooltip>
             </Grid>
 
@@ -64,7 +66,7 @@ export default function Schedule() {
     
                     schedule.map((match: MatchProps) => {
                         return(
-                            <Grid item key={match.matchTime.toString()} xs={12}>
+                            <Grid item key={match.id} xs={12}>
                                 <Match {... match}></Match>
                             </Grid>
                         );
@@ -78,5 +80,6 @@ export default function Schedule() {
                 }
             </Grid>
         </Grid>
-    </Box>);
+    </Box>
+    </>);
 }

@@ -1,12 +1,13 @@
-import { Card, CardContent, Divider, Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Card, CardContent, Button, Divider, Grid, MenuItem, TextField, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import React, { useState }  from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { addMatch } from '../utils/firebaseService';
+import { addMatch, modifyMatch } from '../utils/firebaseService';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
+import { MatchProps } from './Match';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -26,23 +27,37 @@ const validationSchema = yup.object({
     game: yup.string()
 });
 
-export default function AddMatchForm() {
+type MatchFormProps = {
+    modify?: MatchProps,
+    modalClose?: () => void,
+    minWidth?: string,
+    maxWidth?: string
+}
+
+export default function MatchForm(props: MatchFormProps) {
     const [submitting, setSubmitting] = useState(false);
 
-    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(dayjs(),);
+    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(props.modify ? dayjs.unix(props.modify.matchTime) : dayjs());
     const handleMatchTimeChange = (newValue: Dayjs | null) => {
         setMatchTimeVal(newValue);
         if(newValue !== null) formik.values.matchTime = newValue.unix();
       };
 
+    const resetForm = () => {
+        formik.resetForm();
+        setMatchTimeVal(dayjs());
+        setSubmitting(false);
+        props.modalClose && props.modalClose();
+    }
+
     const formik = useFormik({
         initialValues: {
-            title: '',
-            home: '',
-            away: '',
-            matchTime: dayjs().unix(),
-            twitch: '',
-            game: 'other'
+            title: props.modify ? props.modify.title : '',
+            home: props.modify ? props.modify.home : '',
+            away: props.modify ? props.modify.away : '',
+            matchTime: props.modify ? props.modify.matchTime : dayjs().unix(),
+            twitch: props.modify ? props.modify.twitch : '',
+            game: props.modify ? props.modify.game : 'other'
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
@@ -50,29 +65,39 @@ export default function AddMatchForm() {
 
             console.log(matchTimeVal?.format())
 
-            addMatch({
+            const match: MatchProps = {
                 title: values.title,
                 home: values.home,
                 away: values.away,
                 matchTime: values.matchTime,
                 twitch: values.twitch,
                 game: values.game
-            })
+            }
+
+            props.modify && props.modify.id ? modifyMatch(props.modify.id, match).then(() => {
+                resetForm()
+            }, () => setSubmitting(false)) :
+            addMatch(match)
             .then(() => {
-                formik.resetForm();
-                setMatchTimeVal(dayjs())
-                setSubmitting(false);
+                resetForm();
             }, () => setSubmitting(false));
-        }
+        },
     });
 
+    const handleDelete = () => {
+        alert('Delete')
+        resetForm();
+    }
+
     return (
-        <Card>
+        <Card >
             <CardContent>
                 <form onSubmit={formik.handleSubmit}>
-                    <Grid container rowSpacing={2} columnSpacing={1} minWidth={'350px'} maxWidth={'35vw'}>
+                    <Grid container rowSpacing={2} columnSpacing={1} minWidth={props.minWidth} maxWidth={props.maxWidth}>
                         <Grid item xs={12}>
-                            <Typography variant={'h5'}>Add Match</Typography>
+                            <Typography variant={'h5'}>
+                                {props.modify ? 'Modify' : 'Add'} Match 
+                            </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Divider></Divider>
@@ -114,12 +139,12 @@ export default function AddMatchForm() {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                     label='Match Time'
-                                    minDateTime={dayjs().subtract(1, 'hour')}
+                                    minDateTime={props.modify ? dayjs().subtract(1, 'day') : dayjs().subtract(1, 'hour')}
                                     maxDateTime={dayjs().add(1, 'year')}
                                     ampm={false}
                                     renderInput={(props: any) => 
                                         <TextField 
-                                            fullWidth 
+                                            fullWidth
                                             id='matchTime' 
                                             name='matchTime'
                                             onChange={formik.handleChange}
@@ -162,9 +187,16 @@ export default function AddMatchForm() {
                                 <MenuItem value="other">Other</MenuItem>
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
+                        <Grid item xs={12}>
                             <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Submit</LoadingButton>
                         </Grid>
+                        {props.modify && <>
+                        <Grid item xs={6}>
+                            <LoadingButton loading={submitting} fullWidth variant='contained' onClick={props.modalClose}>Cancel</LoadingButton>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <LoadingButton loading={submitting} fullWidth variant='contained' color='error' onClick={handleDelete}>Delete</LoadingButton>
+                        </Grid></>}
                     </Grid>
                 </form>
             </CardContent>

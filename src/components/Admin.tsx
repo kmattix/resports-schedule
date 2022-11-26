@@ -3,10 +3,10 @@ import { CalendarMonth, Logout } from '@mui/icons-material';
 import React, { useState }  from 'react';
 import { useNavigate } from 'react-router-dom';
 import resportsLogo from '../assets/logo192.png';
-import AddMatchForm from './AddMatchForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseService';
 import { signOut } from 'firebase/auth';
+import MatchForm from './MatchForm';
 
 
 export default function Admin() {
@@ -66,12 +66,11 @@ export default function Admin() {
                         <ListItemText>Logout</ListItemText>
                     </MenuItem>
             </Menu>
-
             <Box
             display='flex'
             justifyContent='center'
             alignItems='top'>
-                <AddMatchForm/>
+                <MatchForm minWidth='300px' maxWidth='40vw'/>
             </Box>
         </> :
         navigate('/sign-in')}
