@@ -1,6 +1,6 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, CardContent, Divider, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Divider, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
@@ -107,12 +107,17 @@ export default function SignIn() {
                                 </FormHelperText>
                             </FormControl>
                         </Grid>
-                        <Grid container item display='flex' justifyContent='center' alignItems='center' rowSpacing={1} xs={12}>
-                            <Grid item xs={12}>
-                                <Typography color='error' sx={{ visibility: errorMessage ? 'visible' : 'hidden' }}>Email or password is incorrect</Typography>
+                        <Grid container item rowSpacing={1} xs={12}>
+                            <Grid item paddingBottom={1} xs={12}>
+                                <Typography color='error' align='center' sx={{ visibility: errorMessage ? 'visible' : 'hidden' }}>Email or password is incorrect</Typography>
                             </Grid>
-                            <Grid item xs={12}>
-                                <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Sign In</LoadingButton>
+                            <Grid item container xs={12} columnSpacing={1}>
+                                <Grid item xs={6}>
+                                    <Button fullWidth variant='contained' onClick={() => { navigate('/') }}>Cancel</Button>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Sign In</LoadingButton>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
