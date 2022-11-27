@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Tooltip, Typography } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GameIcon from './GameIcon';
 import { formatMatchDate }  from '../utils/formatDate';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseService';
 import { MoreHoriz } from '@mui/icons-material';
 import MatchForm from './MatchForm';
+import dayjs from 'dayjs';
 
 export type MatchProps = {
     id?: string,
@@ -21,6 +22,7 @@ export type MatchProps = {
 export default function Match(props: MatchProps) {
     const [user] = useAuthState(auth);
 
+    const [matchTime, setMatchTime] = useState(formatMatchDate(props.matchTime));
     const [showContext, setShowContext] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -35,6 +37,16 @@ export default function Match(props: MatchProps) {
     const handleModalClose = () => {
         setModalOpen(false);
     }
+
+    //updates the timers every minute or when the fire store hook fires off from props
+    useEffect(() => {
+        setMatchTime(formatMatchDate(props.matchTime))
+        const interval = setInterval(() => {
+            setMatchTime(formatMatchDate(props.matchTime))
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [props.matchTime]);
 
     return (<>
             <Card onMouseOver={() => handleHover(true)} onMouseOut={() => handleHover(false)}>
@@ -68,7 +80,7 @@ export default function Match(props: MatchProps) {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant='h6'>
-                                        {formatMatchDate(props.matchTime)}
+                                        {matchTime}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} marginTop={1}>
