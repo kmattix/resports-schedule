@@ -57,7 +57,7 @@ export default function Match(props: MatchProps) {
                         <Grid item xs={10}>
                             <Grid container paddingRight={2}>
                                 <Grid item xs={12}>
-                                    <Typography variant='h4' color={'text.secondary'} noWrap>
+                                    <Typography variant='h5' color={'text.secondary'} noWrap>
                                         {props.title}
                                     </Typography>
                                 </Grid>
