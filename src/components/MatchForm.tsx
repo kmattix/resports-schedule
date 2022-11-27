@@ -140,7 +140,7 @@ export default function MatchForm(props: MatchFormProps) {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                     label='Match Time'
-                                    minDateTime={props.modify ? dayjs().subtract(1, 'day') : dayjs().subtract(1, 'hour')}
+                                    minDateTime={props.modify && props.modify.matchTime < dayjs().unix() ? dayjs().subtract(1, 'day') : dayjs().subtract(1, 'hour')}
                                     maxDateTime={dayjs().add(1, 'year')}
                                     ampm={false}
                                     renderInput={(props: any) => 
