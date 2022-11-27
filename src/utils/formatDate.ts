@@ -4,20 +4,20 @@ export const formatMatchDate = (n: number): string => {
     const d = dayjs.unix(n);
     let day = '';
 
-    if (d.unix() < dayjs().subtract(1, 'hour').unix()){
+    if (d.unix() < dayjs().subtract(1, 'hour').unix()) {
         return 'Completed';
     }
     
-    if(d.unix() < dayjs().unix()){
+    if(d.unix() < dayjs().unix()) {
         return 'Live Now';
     }
 
-    if(dayjs().add(6, 'day').unix() > d.unix()){
+    if(dayjs().add(6, 'day').unix() > d.unix()) {
         if(d.day() === dayjs().day()){
             day = 'Today';
         } 
         else{
-            switch(d.day()){
+            switch(d.day()) {
                 case 0:
                     day = 'Sunday';
                     break;
