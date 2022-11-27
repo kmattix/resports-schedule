@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } fro
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { auth, querySchedule } from '../utils/firebaseService';
+import { auth, querySchedule, removeOldMatches } from '../utils/firebaseService';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
@@ -18,8 +18,10 @@ export default function Schedule() {
 
     const [schedule, setSchedule] = useState<MatchProps[]>([]);
 
+
     useEffect(() => {
         let newSchedule: MatchProps[] = [];
+
         snapshot && snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
             newSchedule.push({
                     id: doc.id,
@@ -31,8 +33,13 @@ export default function Schedule() {
                     game: doc.data().game
                 });
             });
+
         setSchedule(formatSchedule(newSchedule));
-    }, [snapshot]);
+    }, [snapshot, user]);
+
+    useEffect(() => {
+        user && removeOldMatches(schedule);
+    }, [user, schedule])
 
   return (
     <>

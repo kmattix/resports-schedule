@@ -7,7 +7,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseService';
 import { MoreHoriz } from '@mui/icons-material';
 import MatchForm from './MatchForm';
-import dayjs from 'dayjs';
 
 export type MatchProps = {
     id?: string,

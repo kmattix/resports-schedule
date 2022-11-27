@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { firebaseConfig } from '../firebase.config';
 import { collection, query } from 'firebase/firestore';
 import { MatchProps } from '../components/Match';
+import dayjs from 'dayjs';
 
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
@@ -20,10 +21,6 @@ export const addMatch = async (match: MatchProps) => {
     await addDoc(collection(db, 'schedule'), match);
 }
 
-export const removeMatch = async (id: string) => {
-    await deleteDoc(doc(db, 'schedule', id));
-}
-
 export const modifyMatch = async (id: string, match: MatchProps) => {
     await setDoc(doc(db, 'schedule', id), {
         title: match.title,
@@ -33,4 +30,14 @@ export const modifyMatch = async (id: string, match: MatchProps) => {
         matchTime: match.matchTime,
         game: match.game
     });
+}
+
+export const removeMatch = async (id: string) => {
+    await deleteDoc(doc(db, 'schedule', id));
+}
+
+export const removeOldMatches = async (matches: MatchProps[]) => {
+    matches.forEach((match) => {
+        if (match.matchTime < dayjs().subtract(1, 'day').unix() && match.id) removeMatch(match.id);
+    })
 }
