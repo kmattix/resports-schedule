@@ -13,10 +13,10 @@ export const formatMatchDate = (n: number): string => {
     }
 
     if(dayjs().add(6, 'day').unix() > d.unix()) {
-        if(d.day() === dayjs().day()){
+        if(d.day() === dayjs().day()) {
             day = 'Today';
         } 
-        else{
+        else {
             switch(d.day()) {
                 case 0:
                     day = 'Sunday';
