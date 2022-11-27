@@ -4,7 +4,7 @@ The varsity esports schedule website for Radford Esports.
 
 ## Client
 
-The main page of the app has a responsive schedule page that updates when the [firestore](https://firebase.google.com/docs/firestore) back-end is changed with [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks/blob/master/firestore/README.md). It is also set on an interval to update changed UI elements every 10s (primary for the time formatting). This page should never need a refresh to update the UI, and can be left up statically and unattended.
+The main page of the app has a responsive schedule page that updates when the [firestore](https://firebase.google.com/docs/firestore) back-end is changed with [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks/blob/master/firestore/README.md). No matches from the previous day or older will be displayed on the UI. It is also set on an interval to update changed UI elements every 10s (primary for the time formatting). This page should never need a refresh to update the UI, and can be left up statically and unattended.
 
 ![Schedule page](https://i.imgur.com/0pdAly1.png)
 
@@ -40,7 +40,7 @@ Here you can choose to modify or delete a match.
 
 ### Extras
 
-- It is also important to note that when an authenticated user (admin) visits the schedule page, any matches older that 2 days past it's start time will be deleted permenatly from firestore. This is to maintain low useage on database to remain at the free tier.
+- It is also important to note that when an authenticated user (admin) visits the schedule page, any matches older that 1 days past it's start time will be deleted permenatly from firestore. This is to maintain low useage on database to remain at the free tier.
 - The security permissions set up in the [firestore security rules](https://firebase.google.com/docs/firestore/security/rules-structure) are made so that no writes can be made to any data unless it's from an authenticated user. Any user can make reads, because all the data is meant to be public.
 - Adding new users can only be done through the [firebase console](https://console.firebase.google.com/). This app is really not meant to be making new accounts as they have full access over the data. This is a security measure. 
 
