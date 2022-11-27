@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } fro
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { auth, querySchedule } from '../utils/firebaseService';
+import { auth, querySchedule, removeOldMatches } from '../utils/firebaseService';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ export default function Schedule() {
     const navigate = useNavigate();
 
     const [schedule, setSchedule] = useState<MatchProps[]>([]);
+
 
     //updates the schedule every 10 seconds or when the firestore state fires off
     useEffect(() => {
@@ -34,6 +35,8 @@ export default function Schedule() {
                         game: doc.data().game
                     });
                 });
+
+                user && removeOldMatches(newSchedule);
     
             setSchedule(formatSchedule(newSchedule));
         }
@@ -44,7 +47,7 @@ export default function Schedule() {
         }, 10000);
 
         return () => clearInterval(interval);
-    }, [snapshot]);
+    }, [snapshot, user]);
 
   return (
     <>
