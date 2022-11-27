@@ -18,28 +18,33 @@ export default function Schedule() {
 
     const [schedule, setSchedule] = useState<MatchProps[]>([]);
 
-
+    //updates the schedule every 10 seconds or when the firestore state fires off
     useEffect(() => {
-        let newSchedule: MatchProps[] = [];
-
-        snapshot && snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
-            newSchedule.push({
-                    id: doc.id,
-                    title: doc.data().title,
-                    home: doc.data().home,
-                    away: doc.data().away,
-                    matchTime: doc.data().matchTime,
-                    twitch: doc.data().twitch,
-                    game: doc.data().game
+        const updateSchedule = () => {
+            let newSchedule: MatchProps[] = [];
+    
+            snapshot && snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
+                newSchedule.push({
+                        id: doc.id,
+                        title: doc.data().title,
+                        home: doc.data().home,
+                        away: doc.data().away,
+                        matchTime: doc.data().matchTime,
+                        twitch: doc.data().twitch,
+                        game: doc.data().game
+                    });
                 });
-            });
+    
+            setSchedule(formatSchedule(newSchedule));
+        }
 
-        setSchedule(formatSchedule(newSchedule));
-    }, [snapshot, user]);
+        updateSchedule();
+        const interval = setInterval(() => {
+            updateSchedule();
+        }, 10000);
 
-    useEffect(() => {
-        user && removeOldMatches(schedule);
-    }, [user, schedule])
+        return () => clearInterval(interval);
+    }, [snapshot]);
 
   return (
     <>
