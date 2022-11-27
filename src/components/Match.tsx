@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Tooltip, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GameIcon from './GameIcon';
 import { formatMatchDate }  from '../utils/formatDate';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
