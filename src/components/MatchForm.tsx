@@ -1,4 +1,5 @@
-import { Card, CardContent, Divider, Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Card, CardContent, Divider, Grid, MenuItem, TextField, Typography } 
+    from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import React, { useState }  from 'react';
 import { useFormik } from 'formik';
@@ -36,12 +37,13 @@ type MatchFormProps = {
 
 export default function MatchForm(props: MatchFormProps) {
     const [submitting, setSubmitting] = useState(false);
+    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(
+        props.modify ? dayjs.unix(props.modify.matchTime) : dayjs());
 
-    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(props.modify ? dayjs.unix(props.modify.matchTime) : dayjs());
     const handleMatchTimeChange = (newValue: Dayjs | null) => {
         setMatchTimeVal(newValue);
         if(newValue !== null) formik.values.matchTime = newValue.unix();
-      };
+    }
 
     const resetForm = () => {
         formik.resetForm();
@@ -72,7 +74,8 @@ export default function MatchForm(props: MatchFormProps) {
                 game: values.game
             }
 
-            props.modify && props.modify.id ? modifyMatch(props.modify.id, match).then(() => {
+            props.modify && props.modify.id ? 
+            modifyMatch(props.modify.id, match).then(() => {
                 resetForm()
             }, () => setSubmitting(false)) :
             addMatch(match)
@@ -85,7 +88,8 @@ export default function MatchForm(props: MatchFormProps) {
     const handleDelete = () => {
         setSubmitting(true);
         
-        props.modify && props.modify.id && removeMatch(props.modify.id).then(() => {
+        props.modify && props.modify.id && 
+        removeMatch(props.modify.id).then(() => {
             resetForm();
         }, () => setSubmitting(false));
     }
@@ -94,7 +98,12 @@ export default function MatchForm(props: MatchFormProps) {
         <Card >
             <CardContent>
                 <form onSubmit={formik.handleSubmit}>
-                    <Grid container rowSpacing={2} columnSpacing={1} minWidth={props.minWidth} maxWidth={props.maxWidth}>
+                    <Grid 
+                    container 
+                    rowSpacing={2} 
+                    columnSpacing={1} 
+                    minWidth={props.minWidth} 
+                    maxWidth={props.maxWidth}>
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>
                                 {props.modify ? 'Modify' : 'Add'} Match 
@@ -111,8 +120,10 @@ export default function MatchForm(props: MatchFormProps) {
                                 label='Match Title'
                                 value={formik.values.title}
                                 onChange={formik.handleChange}
-                                error={formik.touched.title && Boolean(formik.errors.title)}
-                                helperText={formik.touched.title && formik.errors.title}/>
+                                error={formik.touched.title && 
+                                    Boolean(formik.errors.title)}
+                                helperText={formik.touched.title && 
+                                    formik.errors.title}/>
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
@@ -122,8 +133,10 @@ export default function MatchForm(props: MatchFormProps) {
                                 label='Home'
                                 value={formik.values.home}
                                 onChange={formik.handleChange}
-                                error={formik.touched.home && Boolean(formik.errors.home)}
-                                helperText={formik.touched.home && formik.errors.home}/>
+                                error={formik.touched.home && 
+                                    Boolean(formik.errors.home)}
+                                helperText={formik.touched.home && 
+                                    formik.errors.home}/>
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
@@ -133,14 +146,19 @@ export default function MatchForm(props: MatchFormProps) {
                                 label='Away (optional)'
                                 value={formik.values.away}
                                 onChange={formik.handleChange}
-                                error={formik.touched.away && Boolean(formik.errors.away)}
-                                helperText={formik.touched.away && formik.errors.away}/>
+                                error={formik.touched.away && 
+                                    Boolean(formik.errors.away)}
+                                helperText={formik.touched.away && 
+                                    formik.errors.away}/>
                         </Grid>
                         <Grid item xs={12}> 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                     label='Match Time'
-                                    minDateTime={props.modify && props.modify.matchTime < dayjs().unix() ? dayjs().subtract(1, 'day') : dayjs().subtract(1, 'hour')}
+                                    minDateTime={props.modify && 
+                                        props.modify.matchTime < dayjs().unix() ? 
+                                        dayjs().subtract(1, 'day') : 
+                                        dayjs().subtract(1, 'hour')}
                                     maxDateTime={dayjs().add(1, 'year')}
                                     ampm={false}
                                     renderInput={(props: any) => 
@@ -149,7 +167,8 @@ export default function MatchForm(props: MatchFormProps) {
                                             id='matchTime' 
                                             name='matchTime'
                                             onChange={formik.handleChange}
-                                            error={formik.touched.matchTime && Boolean(formik.errors.matchTime)}
+                                            error={formik.touched.matchTime && 
+                                                Boolean(formik.errors.matchTime)}
                                             {...props}/>}
                                     value={matchTimeVal}
                                     onChange={(value) => {
@@ -201,5 +220,6 @@ export default function MatchForm(props: MatchFormProps) {
                     </Grid>
                 </form>
             </CardContent>
-        </Card>);
+        </Card>
+    );
 }

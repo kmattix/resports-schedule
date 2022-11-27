@@ -14,7 +14,9 @@ import SignIn from './components/SignIn';
 function App() {
   return (<>
     <Helmet>
-      <style>{`body { background-color: ${defaultTheme.palette.background.default}; }`}</style>
+      <style>
+        {`body { background-color: ${defaultTheme.palette.background.default}; }`}
+      </style>
     </Helmet>
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>

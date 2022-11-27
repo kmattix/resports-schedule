@@ -19,12 +19,14 @@ export default function Schedule() {
     const [schedule, setSchedule] = useState<MatchProps[]>([]);
 
 
-    //updates the schedule every 10 seconds or when the firestore state fires off
+    // updates the schedule every 10 seconds or 
+    // when the firestore state fires off
     useEffect(() => {
         const updateSchedule = () => {
             let newSchedule: MatchProps[] = [];
     
-            snapshot && snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
+            snapshot && snapshot.docs.forEach(
+                (doc: QueryDocumentSnapshot) => {
                 newSchedule.push({
                         id: doc.id,
                         title: doc.data().title,
@@ -73,7 +75,13 @@ export default function Schedule() {
             <Grid item xs={12} marginBottom={1}>
                 <Divider/>
             </Grid>
-            <Grid container item rowSpacing={2} display='flex' justifyContent='center' xs={12}>
+            <Grid 
+            container 
+            item 
+            rowSpacing={2} 
+            display='flex' 
+            justifyContent='center' 
+            xs={12}>
                 {
                     loading ? <CircularProgress sx={{ marginTop: '20vh' }}/> :  
 
@@ -88,7 +96,10 @@ export default function Schedule() {
                     }) :
     
                     <Grid item xs={12}>
-                        <Typography variant='h4' color='text.disabled' align='center'>
+                        <Typography 
+                        variant='h4' 
+                        color='text.disabled' 
+                        align='center'>
                             No upcoming matches...
                         </Typography>
                     </Grid>

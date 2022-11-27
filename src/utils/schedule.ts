@@ -8,7 +8,8 @@ dayjs.extend(isYesterday);
 export const formatSchedule = (schedule: Array<MatchProps>): Array<MatchProps> => {
 
     const formatted = schedule.filter((item) => {
-        return !dayjs.unix(item.matchTime).isYesterday() || (item.matchTime < dayjs().subtract(1, 'day').unix());
+        return !dayjs.unix(item.matchTime).isYesterday() || 
+            (item.matchTime < dayjs().subtract(1, 'day').unix());
     });
 
     return formatted.sort((a, b) => {

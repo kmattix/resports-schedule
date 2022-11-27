@@ -52,5 +52,6 @@ export const formatMatchDate = (n: number): string => {
     hours = hours % 12;
     hours = hours ? hours : 12;
 
-    return (`${day} @ ${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`);
+    return (`${day} @ ${hours}:${minutes < 10 ? 
+        '0' + minutes : minutes} ${ampm}`);
 }

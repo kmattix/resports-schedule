@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, deleteDoc, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { addDoc, deleteDoc, doc, getFirestore, setDoc } 
+    from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { firebaseConfig } from '../firebase.config';
 import { collection, query } from 'firebase/firestore';
@@ -38,6 +39,7 @@ export const removeMatch = async (id: string) => {
 
 export const removeOldMatches = async (matches: MatchProps[]) => {
     matches.forEach((match) => {
-        if (match.matchTime < dayjs().subtract(1, 'day').unix() && match.id) removeMatch(match.id);
+        if (match.matchTime < dayjs().subtract(1, 'day').unix() && match.id) 
+            removeMatch(match.id);
     })
 }

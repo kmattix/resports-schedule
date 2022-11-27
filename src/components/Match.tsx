@@ -1,4 +1,5 @@
-import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Tooltip, Typography } 
+    from '@mui/material';
 import React, { useState } from 'react'
 import GameIcon from './GameIcon';
 import { formatMatchDate }  from '../utils/formatDate';
@@ -37,7 +38,9 @@ export default function Match(props: MatchProps) {
     }
 
     return (<>
-            <Card onMouseOver={() => handleHover(true)} onMouseOut={() => handleHover(false)}>
+            <Card 
+            onMouseOver={() => handleHover(true)} 
+            onMouseOut={() => handleHover(false)}>
                 <CardContent>
                     <Grid container>
                         {showContext && <>
@@ -47,9 +50,14 @@ export default function Match(props: MatchProps) {
                                 </Typography>
                             </Grid>
                             <Grid item display='flex' justifyContent='flex-end' xs={6}>
-                                <Tooltip title='Modify match' placement='left' enterDelay={500} enterNextDelay={2000} arrow>
+                                <Tooltip 
+                                title='Modify match' 
+                                placement='left' 
+                                enterDelay={500} 
+                                enterNextDelay={2000} 
+                                arrow>
                                     <IconButton size='small' onClick={handleModalOpen}>
-                                        <MoreHoriz color='disabled' fontSize='small'></MoreHoriz>
+                                        <MoreHoriz color='disabled' fontSize='small'/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
@@ -75,7 +83,10 @@ export default function Match(props: MatchProps) {
                                     <Button 
                                         variant='contained' 
                                         href={`https://twitch.tv/${props.twitch}`}
-                                        sx={{ textTransform:'none', maxWidth: '95%', '&:hover': { backgroundColor: '#9146FF' }}} 
+                                        sx={{ 
+                                            textTransform:'none', 
+                                            maxWidth: '95%', 
+                                            '&:hover': { backgroundColor: '#9146FF' }}}
                                         startIcon={
                                             <SvgIcon sx={{ fontSize: '24px' }}>
                                                 <TwitchIcon/>
@@ -85,7 +96,14 @@ export default function Match(props: MatchProps) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item paddingRight={2} xs={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Grid 
+                        item 
+                        paddingRight={2} 
+                        xs={2} 
+                        sx={{ 
+                            display: 'flex', 
+                            justifyContent: 'center', 
+                            alignItems: 'center' }}>
                             <GameIcon game={props.game}/>
                         </Grid>
                     </Grid>
@@ -101,5 +119,5 @@ export default function Match(props: MatchProps) {
                     <MatchForm modify={props} modalClose={handleModalClose} maxWidth='40rem'/>
                 </Box>
             </Modal>
-            </>);
+    </>);
 }

@@ -9,10 +9,8 @@ import smashultimateIcon from '../assets/smashultimate.png';
 import fifaIcon from '../assets/fifa.png';
 import nba2kIcon from '../assets/nba2k.png';
 
-
 type GameIconProps = {
     game: MatchProps['game']
-
 }
 
 export default function GameIcon({ game }: GameIconProps) {

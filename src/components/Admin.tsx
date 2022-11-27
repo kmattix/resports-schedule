@@ -1,4 +1,5 @@
-import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem } 
+    from '@mui/material';
 import { CalendarMonth, Logout } from '@mui/icons-material';
 import React, { useState }  from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseService';
 import { signOut } from 'firebase/auth';
 import MatchForm from './MatchForm';
-
 
 export default function Admin() {
     const navigate = useNavigate();
@@ -33,38 +33,36 @@ export default function Admin() {
         {user ? <>
             <IconButton onClick={handleClick}>
                 <Box
-                    component={'img'}
-                    sx={{
-                        maxHeight: 50,
-                        maxWidth: 50,
-                        backgroundColor: 'white',
-                        borderRadius: '50%',
-                        padding: '2px',
-                    }}
-                    alt={'Schedule'}
-                    src={resportsLogo}/>
+                component={'img'}
+                sx={{
+                    maxHeight: 50,
+                    maxWidth: 50,
+                    backgroundColor: 'white',
+                    borderRadius: '50%',
+                    padding: '2px',
+                }}
+                alt={'Schedule'}
+                src={resportsLogo}/>
             </IconButton>
             
             <Menu 
-                id='admin-menu'
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button'
-                }}>
-                    <MenuItem onClick={() => navigate('/')}>
-                        <ListItemIcon >
-                            <CalendarMonth fontSize='small'/>
-                        </ListItemIcon>
-                        <ListItemText>Schedule</ListItemText>
-                    </MenuItem>
-                    <MenuItem onClick={() => handleLogout()}>
-                        <ListItemIcon >
-                            <Logout  fontSize='small'/>
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
+            id='admin-menu'
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
+                <MenuItem onClick={() => navigate('/')}>
+                    <ListItemIcon >
+                        <CalendarMonth fontSize='small'/>
+                    </ListItemIcon>
+                    <ListItemText>Schedule</ListItemText>
+                </MenuItem>
+                <MenuItem onClick={() => handleLogout()}>
+                    <ListItemIcon >
+                        <Logout  fontSize='small'/>
+                    </ListItemIcon>
+                    <ListItemText>Logout</ListItemText>
+                </MenuItem>
             </Menu>
             <Box
             display='flex'
