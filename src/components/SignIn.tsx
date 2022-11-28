@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { auth } from '../utils/firebaseService';
+import { auth } from '../utils/firebase-service';
 
 const validationSchema = yup.object({
     email: yup.string()

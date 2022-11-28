@@ -2,10 +2,10 @@ import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Toolt
     from '@mui/material';
 import React, { useState } from 'react'
 import GameIcon from './GameIcon';
-import { formatMatchDate }  from '../utils/formatDate';
+import { formatMatchDate }  from '../utils/format-date';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../utils/firebaseService';
+import { auth } from '../utils/firebase-service';
 import { MoreHoriz } from '@mui/icons-material';
 import MatchForm from './MatchForm';
 import { toolTipDelays } from './global/Settings';

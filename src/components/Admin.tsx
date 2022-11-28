@@ -5,7 +5,7 @@ import React, { useState }  from 'react';
 import { useNavigate } from 'react-router-dom';
 import resportsLogo from '../assets/logo192.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../utils/firebaseService';
+import { auth } from '../utils/firebase-service';
 import { signOut } from 'firebase/auth';
 import MatchForm from './MatchForm';
 

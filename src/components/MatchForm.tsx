@@ -4,7 +4,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import React, { useState }  from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { addMatch, modifyMatch, removeMatch } from '../utils/firebaseService';
+import { addMatch, modifyMatch, removeMatch } from '../utils/firebase-service';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';

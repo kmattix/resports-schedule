@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } fro
 import React, { useEffect, useState } from 'react';
 import Match, { MatchProps } from './Match';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { auth, querySchedule, removeOldMatches } from '../utils/firebaseService';
+import { auth, querySchedule, removeOldMatches } from '../utils/firebase-service';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
