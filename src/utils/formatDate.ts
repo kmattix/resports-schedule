@@ -12,7 +12,7 @@ export const formatMatchDate = (n: number): string => {
         return 'Live Now';
     }
 
-    if(dayjs().add(6, 'day').unix() > d.unix()) {
+    if(dayjs().add(7, 'day').unix() > d.unix()) {
         if(d.day() === dayjs().day()) {
             day = 'Today';
         } 

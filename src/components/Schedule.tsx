@@ -8,6 +8,7 @@ import { formatSchedule } from '../utils/schedule';
 import { useNavigate } from 'react-router-dom';
 import resportslogo from '../assets/logo4231.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { refreshDelay } from './global/Settings';
 
 export default function Schedule() {
     
@@ -46,7 +47,7 @@ export default function Schedule() {
         updateSchedule();
         const interval = setInterval(() => {
             updateSchedule();
-        }, 10000);
+        }, refreshDelay * 1000);
 
         return () => clearInterval(interval);
     }, [snapshot, user]);
@@ -82,28 +83,26 @@ export default function Schedule() {
             display='flex' 
             justifyContent='center' 
             xs={12}>
-                {
-                    loading ? <CircularProgress sx={{ marginTop: '20vh' }}/> :  
+                {loading ? <CircularProgress sx={{ marginTop: '20vh' }}/> :  
 
-                    schedule.length ? 
-    
-                    schedule.map((match: MatchProps) => {
-                        return(
-                            <Grid item key={match.id} xs={12}>
-                                <Match {... match}></Match>
-                            </Grid>
-                        );
-                    }) :
-    
-                    <Grid item xs={12}>
-                        <Typography 
-                        variant='h4' 
-                        color='text.disabled' 
-                        align='center'>
-                            No upcoming matches...
-                        </Typography>
-                    </Grid>
-                }
+                schedule.length ? 
+
+                schedule.map((match: MatchProps) => {
+                    return(
+                        <Grid item key={match.id} xs={12}>
+                            <Match {... match}></Match>
+                        </Grid>
+                    );
+                }) :
+
+                <Grid item xs={12}>
+                    <Typography 
+                    variant='h4' 
+                    color='text.disabled' 
+                    align='center'>
+                        No upcoming matches...
+                    </Typography>
+                </Grid>}
             </Grid>
         </Grid>
     </Box>

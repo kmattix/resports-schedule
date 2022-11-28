@@ -9,6 +9,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 import { MatchProps } from './Match';
+import { matchTimes } from './global/Settings';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -157,9 +158,9 @@ export default function MatchForm(props: MatchFormProps) {
                                     label='Match Time'
                                     minDateTime={props.modify && 
                                         props.modify.matchTime < dayjs().unix() ? 
-                                        dayjs().subtract(1, 'day') : 
-                                        dayjs().subtract(1, 'hour')}
-                                    maxDateTime={dayjs().add(1, 'year')}
+                                        matchTimes.minModifyPassed : 
+                                        matchTimes.min}
+                                    maxDateTime={matchTimes.max}
                                     ampm={false}
                                     renderInput={(props: any) => 
                                         <TextField 
@@ -208,14 +209,34 @@ export default function MatchForm(props: MatchFormProps) {
                             </TextField>
                         </Grid>
                         <Grid item xs={12}>
-                            <LoadingButton loading={submitting} fullWidth variant='contained' color='success' type='submit'>Submit</LoadingButton>
+                            <LoadingButton 
+                            loading={submitting} 
+                            fullWidth 
+                            variant='contained'
+                            color='success' 
+                            type='submit'>
+                                Submit
+                            </LoadingButton>
                         </Grid>
                         {props.modify && <>
                         <Grid item xs={6}>
-                            <LoadingButton loading={submitting} fullWidth variant='contained' onClick={props.modalClose}>Cancel</LoadingButton>
+                            <LoadingButton 
+                            loading={submitting} 
+                            fullWidth 
+                            variant='contained' 
+                            onClick={props.modalClose}>
+                                Cancel
+                            </LoadingButton>
                         </Grid>
                         <Grid item xs={6}>
-                            <LoadingButton loading={submitting} fullWidth variant='contained' color='error' onClick={handleDelete}>Delete</LoadingButton>
+                            <LoadingButton 
+                            loading={submitting} 
+                            fullWidth 
+                            variant='contained' 
+                            color='error' 
+                            onClick={handleDelete}>
+                                Delete
+                            </LoadingButton>
                         </Grid></>}
                     </Grid>
                 </form>

@@ -7,7 +7,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Schedule from './components/Schedule';
 import { ThemeProvider } from '@mui/material/styles';
-import { defaultTheme } from './assets/theme';
+import { defaultTheme } from './components/global/Theme';
 import Admin from './components/Admin';
 import SignIn from './components/SignIn';
 

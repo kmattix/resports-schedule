@@ -8,6 +8,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseService';
 import { MoreHoriz } from '@mui/icons-material';
 import MatchForm from './MatchForm';
+import { toolTipDelays } from './global/Settings';
 
 export type MatchProps = {
     id?: string,
@@ -53,8 +54,8 @@ export default function Match(props: MatchProps) {
                                 <Tooltip 
                                 title='Modify match' 
                                 placement='left' 
-                                enterDelay={500} 
-                                enterNextDelay={2000} 
+                                enterDelay={toolTipDelays.enter} 
+                                enterNextDelay={toolTipDelays.enterNext} 
                                 arrow>
                                     <IconButton size='small' onClick={handleModalOpen}>
                                         <MoreHoriz color='disabled' fontSize='small'/>
