@@ -5,7 +5,7 @@ import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Toolt
     from '@mui/material';
 import { MoreHoriz } from '@mui/icons-material';
 
-import { formatMatchDate }  from '../utils/format-date';
+import { formatMatchDate }  from '../utils/schedule-utilities';
 import { auth } from '../utils/firebase-service';
 
 import MatchForm from './MatchForm';

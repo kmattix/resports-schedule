@@ -6,7 +6,7 @@ import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } from '@mui/material';
 
 import { auth, querySchedule, removeOldMatches } from '../utils/firebase-service';
-import { formatSchedule } from '../utils/schedule';
+import { formatSchedule } from '../utils/schedule-utilities';
 
 import Match, { MatchProps } from './Match';
 

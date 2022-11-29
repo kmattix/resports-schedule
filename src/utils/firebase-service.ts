@@ -16,16 +16,15 @@ export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore();
 
-
 export const querySchedule = () => {
     return query(collection(db, 'schedule'));
 }
 
-export const addMatch = async (match: MatchProps) => {
+export const addMatch = async (match: MatchProps): Promise<void> => {
     await addDoc(collection(db, 'schedule'), match);
 }
 
-export const modifyMatch = async (id: string, match: MatchProps) => {
+export const modifyMatch = async (id: string, match: MatchProps): Promise<void> => {
     await setDoc(doc(db, 'schedule', id), {
         title: match.title,
         home: match.home,
@@ -36,11 +35,11 @@ export const modifyMatch = async (id: string, match: MatchProps) => {
     });
 }
 
-export const removeMatch = async (id: string) => {
+export const removeMatch = async (id: string): Promise<void> => {
     await deleteDoc(doc(db, 'schedule', id));
 }
 
-export const removeOldMatches = async (matches: MatchProps[]) => {
+export const removeOldMatches = async (matches: MatchProps[]): Promise<void> => {
     matches.forEach((match) => {
         if (match.matchTime < matchTimes.minModifyPassed.unix() && match.id) 
             removeMatch(match.id);
