@@ -3,10 +3,13 @@ import { getAnalytics } from 'firebase/analytics';
 import { addDoc, deleteDoc, doc, getFirestore, setDoc } 
     from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import { firebaseConfig } from '../firebase.config';
 import { collection, query } from 'firebase/firestore';
+
 import { MatchProps } from '../components/Match';
+
 import { matchTimes } from '../components/global/Settings';
+
+import { firebaseConfig } from '../firebase.config';
 
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);

@@ -1,15 +1,18 @@
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+import { ThemeProvider } from '@mui/material/styles';
+
+import Schedule from './components/Schedule';
+import Admin from './components/Admin';
+import SignIn from './components/SignIn';
+
+import { defaultTheme } from './components/global/Theme';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import Schedule from './components/Schedule';
-import { ThemeProvider } from '@mui/material/styles';
-import { defaultTheme } from './components/global/Theme';
-import Admin from './components/Admin';
-import SignIn from './components/SignIn';
 
 function App() {
   return (<>

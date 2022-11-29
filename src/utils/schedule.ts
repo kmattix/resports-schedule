@@ -1,7 +1,10 @@
-import { matchTimes } from '../components/global/Settings';
-import { MatchProps } from '../components/Match';
 import dayjs from 'dayjs';
 import isYesterday from 'dayjs/plugin/isYesterday';
+
+import { MatchProps } from '../components/Match';
+
+import { matchTimes } from '../components/global/Settings';
+
 dayjs.extend(isYesterday);
 
 // Removes matches that are yesterday or older, then sorts them newest first.

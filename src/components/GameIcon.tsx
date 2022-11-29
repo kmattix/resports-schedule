@@ -1,7 +1,10 @@
+import React from 'react'
+
 import { Box } from '@mui/material';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+
 import { MatchProps } from './Match';
-import React from 'react'
+
 import rocketleagueIcon from '../assets/rocketleague.png';
 import valorantIcon from '../assets/valorant.png';
 import leagueoflegendsIcon from '../assets/leagueoflegends.png'
