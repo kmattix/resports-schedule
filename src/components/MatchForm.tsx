@@ -208,6 +208,7 @@ export default function MatchForm(props: MatchFormProps) {
                                 <MenuItem value="smashultimate">Smash Ultimate</MenuItem>
                                 <MenuItem value="fifa">FIFA</MenuItem>
                                 <MenuItem value="nba2k">NBA2k</MenuItem>
+                                <MenuItem value="overwatch">Overwatch</MenuItem>
                                 <MenuItem value="other">Other</MenuItem>
                             </TextField>
                         </Grid>

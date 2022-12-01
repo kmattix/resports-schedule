@@ -11,6 +11,7 @@ import leagueoflegendsIcon from '../assets/leagueoflegends.png'
 import smashultimateIcon from '../assets/smashultimate.png';
 import fifaIcon from '../assets/fifa.png';
 import nba2kIcon from '../assets/nba2k.png';
+import overwatchIcon from '../assets/overwatch.png';
 
 type GameIconProps = {
     game: MatchProps['game']
@@ -36,6 +37,9 @@ export default function GameIcon({ game }: GameIconProps) {
             break;
         case 'nba2k':
             image = nba2kIcon;
+            break;
+        case 'overwatch':
+            image = overwatchIcon;
             break;
         default:
             image = 'other';
