@@ -16,7 +16,7 @@ export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore();
 
-const SCHEDULE_COLLECTION = 'schedule-dev';
+const SCHEDULE_COLLECTION = 'schedule';
 
 /**
  * Queries the entire schedule collection.
