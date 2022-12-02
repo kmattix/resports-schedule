@@ -27,13 +27,11 @@ export const formatSchedule = (schedule: Array<MatchProps>): Array<MatchProps> =
 
 /**
  * Formats the match date for display:
- * 
  * - Match time was over an hour old? `Completed`
  * - Match time was within the hour? `Live`
  * - Match time is today and hasn't started yet? `Today @ hh:mm[A/P]M`
  * - Match time is not today and is within the week? `Weekday @ hh:mm[A/P]M`
  * - Match time is further away than this week? `MM/dd @ hh:mm[A/P]M`
- * 
  * @param n A unix timestamp.
  * @returns A formated string displaying when the match is.
  */
