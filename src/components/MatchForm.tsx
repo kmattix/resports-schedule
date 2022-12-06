@@ -42,7 +42,12 @@ type MatchFormProps = {
 export default function MatchForm(props: MatchFormProps) {
     const [submitting, setSubmitting] = useState(false);
     const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(
-        props.modify ? dayjs.unix(props.modify.matchTime) : dayjs());
+        props.modify ? dayjs.unix(props.modify.matchTime) : 
+        //rounds the clock up to the nearest hour
+        dayjs().hour(dayjs().hour() + 1)
+        .subtract(dayjs().minute(), 'minutes')
+        .subtract(dayjs().second(), 'seconds')
+        .subtract(dayjs().millisecond(), 'milliseconds'));
 
     const handleMatchTimeChange = (newValue: Dayjs | null) => {
         setMatchTimeVal(newValue);
@@ -61,7 +66,7 @@ export default function MatchForm(props: MatchFormProps) {
             title: props.modify ? props.modify.title : '',
             home: props.modify ? props.modify.home : '',
             away: props.modify ? props.modify.away : '',
-            matchTime: props.modify ? props.modify.matchTime : dayjs().unix(),
+            matchTime: matchTimeVal ? matchTimeVal.unix() : dayjs().unix(),
             twitch: props.modify ? props.modify.twitch : defaultTwitch,
             game: props.modify ? props.modify.game : 'other'
         },
