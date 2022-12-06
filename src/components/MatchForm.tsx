@@ -29,7 +29,7 @@ const validationSchema = yup.object({
     twitch: yup.string()
         .min(4, 'Twitch usernames must be at least 4 characters')
         .max(25, 'Twitch usernames cannot be more than 25 characters ')
-        .required('Twitch username is required'),
+        .required('Twitch broadcast is required'),
     game: yup.string()
 });
 
@@ -191,7 +191,7 @@ export default function MatchForm(props: MatchFormProps) {
                                 fullWidth
                                 id='twitch'
                                 name='twitch'
-                                label='Twitch Account'
+                                label='Twitch Broadcast'
                                 value={formik.values.twitch}
                                 onChange={formik.handleChange}
                                 error={formik.touched.twitch && Boolean(formik.errors.twitch)}
@@ -220,15 +220,14 @@ export default function MatchForm(props: MatchFormProps) {
                                         <GameIcon size={24} game={formik.values.game}/>
                                     </InputAdornment>
                                 }}>
-                                <MenuItem value="rocketleague">Rocket League</MenuItem>
-                                <MenuItem value="valorant">Valorant</MenuItem>
-                                <MenuItem value="leagueoflegends">League of Legends</MenuItem>
-                                <MenuItem value="smashultimate">Smash Ultimate</MenuItem>
-                                <MenuItem value="fifa">FIFA</MenuItem>
-                                <MenuItem value="nba2k">NBA2k</MenuItem>
-                                <MenuItem value="overwatch">Overwatch</MenuItem>
-                                <MenuItem value="other">Other</MenuItem>
-                                
+                                <MenuItem value='rocketleague'>Rocket League</MenuItem>
+                                <MenuItem value='valorant'>Valorant</MenuItem>
+                                <MenuItem value='leagueoflegends'>League of Legends</MenuItem>
+                                <MenuItem value='smashultimate'>Smash Ultimate</MenuItem>
+                                <MenuItem value='fifa'>FIFA</MenuItem>
+                                <MenuItem value='nba2k'>NBA2k</MenuItem>
+                                <MenuItem value='overwatch'>Overwatch</MenuItem>
+                                <MenuItem value='other'>Other</MenuItem>
                             </TextField>
                         </Grid>
                         <Grid item xs={12}>
