@@ -44,23 +44,23 @@ export default function Match(props: MatchProps) {
 
     return (<>
             <Card 
-            onMouseOver={() => handleHover(true)} 
-            onMouseOut={() => handleHover(false)}>
+                onMouseOver={() => handleHover(true)} 
+                onMouseOut={() => handleHover(false)}>
                 <CardContent>
                     <Grid container>
                         {showContext && <>
-                            <Grid item xs={6}>                                
+                            <Grid item xs={6}>
                                 <Typography variant='body2' color='text.disabled'>
                                     {props.id}
                                 </Typography>
                             </Grid>
                             <Grid item display='flex' justifyContent='flex-end' xs={6}>
                                 <Tooltip 
-                                title='Modify match' 
-                                placement='left' 
-                                enterDelay={toolTipDelays.enter} 
-                                enterNextDelay={toolTipDelays.enterNext} 
-                                arrow>
+                                    title='Modify match' 
+                                    placement='left' 
+                                    enterDelay={toolTipDelays.enter} 
+                                    enterNextDelay={toolTipDelays.enterNext} 
+                                    arrow>
                                     <IconButton size='small' onClick={handleModalOpen}>
                                         <MoreHoriz color='disabled' fontSize='small'/>
                                     </IconButton>
@@ -95,20 +95,20 @@ export default function Match(props: MatchProps) {
                                         startIcon={
                                             <SvgIcon sx={{ fontSize: '24px' }}>
                                                 <TwitchIcon/>
-                                            </SvgIcon>}>{`/ ${props.twitch}`
-                                        }
+                                            </SvgIcon>}>
+                                        {`/ ${props.twitch}`}
                                     </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid 
-                        item 
-                        paddingRight={2} 
-                        xs={2} 
-                        sx={{ 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            alignItems: 'center' }}>
+                            item 
+                            paddingRight={2} 
+                            xs={2} 
+                            sx={{ 
+                                display: 'flex', 
+                                justifyContent: 'center', 
+                                alignItems: 'center' }}>
                             <GameIcon game={props.game}/>
                         </Grid>
                     </Grid>
