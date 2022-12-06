@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { Card, CardContent, Divider, Grid, MenuItem, TextField, Typography } 
+import { Card, CardContent, Divider, Grid, InputAdornment, MenuItem, TextField, Typography } 
     from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -189,7 +189,13 @@ export default function MatchForm(props: MatchFormProps) {
                                 value={formik.values.twitch}
                                 onChange={formik.handleChange}
                                 error={formik.touched.twitch && Boolean(formik.errors.twitch)}
-                                helperText={formik.touched.twitch && formik.errors.twitch}/>
+                                helperText={formik.touched.twitch && formik.errors.twitch}
+                                InputProps={{
+                                    startAdornment: 
+                                    <InputAdornment position='start'>
+                                        twitch.tv/
+                                    </InputAdornment>
+                                }}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
