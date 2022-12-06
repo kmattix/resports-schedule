@@ -12,7 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { addMatch, modifyMatch, removeMatch } from '../utils/firebase-service';
 
 import { MatchProps } from './Match';
-import { matchTimes } from './global/Settings';
+import { defaultTwitch, matchTimes } from './global/Settings';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -62,7 +62,7 @@ export default function MatchForm(props: MatchFormProps) {
             home: props.modify ? props.modify.home : '',
             away: props.modify ? props.modify.away : '',
             matchTime: props.modify ? props.modify.matchTime : dayjs().unix(),
-            twitch: props.modify ? props.modify.twitch : '',
+            twitch: props.modify ? props.modify.twitch : defaultTwitch,
             game: props.modify ? props.modify.game : 'other'
         },
         validationSchema: validationSchema,
@@ -194,8 +194,8 @@ export default function MatchForm(props: MatchFormProps) {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                id='game'
                                 select
+                                id='game'
                                 name='game'
                                 label='Game'
                                 value={formik.values.game}

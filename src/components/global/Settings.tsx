@@ -14,3 +14,5 @@ export const matchTimes = {
     minModifyPassed: dayjs().subtract(1, 'day'),
     max: dayjs().add(1, 'year')
 }
+
+export const defaultTwitch = 'RadfordEsports';
