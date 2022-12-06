@@ -14,12 +14,15 @@ import nba2kIcon from '../assets/nba2k.png';
 import overwatchIcon from '../assets/overwatch.png';
 
 type GameIconProps = {
-    game: MatchProps['game']
+    game: MatchProps['game'],
+    size?: number
 }
 
-export default function GameIcon({ game }: GameIconProps) {
+const defaultSize = 100;
+
+export default function GameIcon(props: GameIconProps) {
     let image: string;
-    switch(game){
+    switch(props.game){
         case 'rocketleague':
             image = rocketleagueIcon;
             break;
@@ -46,14 +49,14 @@ export default function GameIcon({ game }: GameIconProps) {
     }
 
     return ((image === 'other') ? 
-    <VideogameAssetIcon sx={{ fontSize: '110px', color: '#FFFFFF'}}/> : 
+    <VideogameAssetIcon sx={{ fontSize: props.size || defaultSize, color: '#FFFFFF'}}/> : 
     <Box
         component={'img'}
         sx={{
-            maxHeight: 100,
-            maxWidth: 100
+            maxHeight: props.size || defaultSize,
+            maxWidth: props.size || defaultSize
         }}
-        alt={game}
+        alt={props.game}
         src={image}
     />);
 }

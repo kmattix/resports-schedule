@@ -13,6 +13,7 @@ import { addMatch, modifyMatch, removeMatch } from '../utils/firebase-service';
 
 import { MatchProps } from './Match';
 import { defaultTwitch, matchTimes } from './global/Settings';
+import GameIcon from './GameIcon';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -212,7 +213,13 @@ export default function MatchForm(props: MatchFormProps) {
                                 value={formik.values.game}
                                 onChange={formik.handleChange}
                                 error={formik.touched.game && Boolean(formik.errors.game)}
-                                helperText={formik.touched.game && formik.errors.game}>
+                                helperText={formik.touched.game && formik.errors.game}
+                                InputProps={{
+                                    startAdornment: 
+                                    <InputAdornment position='start'>
+                                        <GameIcon size={24} game={formik.values.game}/>
+                                    </InputAdornment>
+                                }}>
                                 <MenuItem value="rocketleague">Rocket League</MenuItem>
                                 <MenuItem value="valorant">Valorant</MenuItem>
                                 <MenuItem value="leagueoflegends">League of Legends</MenuItem>
@@ -221,6 +228,7 @@ export default function MatchForm(props: MatchFormProps) {
                                 <MenuItem value="nba2k">NBA2k</MenuItem>
                                 <MenuItem value="overwatch">Overwatch</MenuItem>
                                 <MenuItem value="other">Other</MenuItem>
+                                
                             </TextField>
                         </Grid>
                         <Grid item xs={12}>
