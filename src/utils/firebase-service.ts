@@ -17,7 +17,7 @@ export const auth = getAuth(app);
 export const db = getFirestore();
 
 // The name for the collection to store matches into.
-const SCHEDULE_COLLECTION = 'schedule';
+const SCHEDULE_COLLECTION = 'schedule-dev';
 
 /**
  * Queries the entire schedule collection.

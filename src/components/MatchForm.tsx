@@ -12,8 +12,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { addMatch, modifyMatch, removeMatch } from '../utils/firebase-service';
 
 import { MatchProps } from './Match';
-import { defaultTwitch, matchTimes } from './global/Settings';
 import GameIcon from './GameIcon';
+
+import { defaultTwitch, games, matchTimes } from './global/Settings';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -220,14 +221,13 @@ export default function MatchForm(props: MatchFormProps) {
                                         <GameIcon size={24} game={formik.values.game}/>
                                     </InputAdornment>
                                 }}>
-                                <MenuItem value='rocketleague'>Rocket League</MenuItem>
-                                <MenuItem value='valorant'>Valorant</MenuItem>
-                                <MenuItem value='leagueoflegends'>League of Legends</MenuItem>
-                                <MenuItem value='smashultimate'>Smash Ultimate</MenuItem>
-                                <MenuItem value='fifa'>FIFA</MenuItem>
-                                <MenuItem value='nba2k'>NBA2k</MenuItem>
-                                <MenuItem value='overwatch'>Overwatch</MenuItem>
-                                <MenuItem value='other'>Other</MenuItem>
+                                {Object.keys(games).map((game) => {
+                                    type GameKey = keyof typeof games;
+                                    const key = game as GameKey;
+                                    return(
+                                        <MenuItem value={game}>{games[key].name}</MenuItem>
+                                    );
+                                })}
                             </TextField>
                         </Grid>
                         <Grid item xs={12}>
