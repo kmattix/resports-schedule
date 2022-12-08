@@ -42,14 +42,16 @@ type MatchFormProps = {
 }
 
 export default function MatchForm(props: MatchFormProps) {
+    const resetDatePicker = () => {
+        return ( props.modify ? dayjs.unix(props.modify.matchTime) : 
+            dayjs().hour(dayjs().hour() + 1)
+            .subtract(dayjs().minute(), 'minutes')
+            .subtract(dayjs().second(), 'seconds')
+            .subtract(dayjs().millisecond(), 'milliseconds'));
+    }
+
     const [submitting, setSubmitting] = useState(false);
-    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(
-        props.modify ? dayjs.unix(props.modify.matchTime) : 
-        //rounds the clock up to the nearest hour
-        dayjs().hour(dayjs().hour() + 1)
-        .subtract(dayjs().minute(), 'minutes')
-        .subtract(dayjs().second(), 'seconds')
-        .subtract(dayjs().millisecond(), 'milliseconds'));
+    const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(resetDatePicker());
 
     const handleMatchTimeChange = (newValue: Dayjs | null) => {
         setMatchTimeVal(newValue);
@@ -58,7 +60,7 @@ export default function MatchForm(props: MatchFormProps) {
 
     const resetForm = () => {
         formik.resetForm();
-        setMatchTimeVal(dayjs());
+        setMatchTimeVal(resetDatePicker());
         setSubmitting(false);
         props.modalClose && props.modalClose();
     }
