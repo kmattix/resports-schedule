@@ -12,7 +12,7 @@ import Match, { MatchProps } from './Match';
 
 import resportslogo from '../assets/logo4231.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { refreshDelay } from './global/Settings';
+import { refreshDelay, toolTipDelays } from './global/Settings';
 
 export default function Schedule() {
     const [snapshot, loading] = useCollection(querySchedule());
@@ -62,7 +62,11 @@ export default function Schedule() {
         alignItems='top'>
             <Grid container rowSpacing={1} sx={{ maxWidth: '40rem' }}>
                 <Grid item xs={12} display='flex' justifyContent='center'>
-                    <Tooltip title= {user ? 'Admin page' : 'Admin login'} arrow>
+                    <Tooltip 
+                    title={user ? 'Admin page' : 'Admin login'} 
+                    enterDelay={toolTipDelays.enter} 
+                    enterNextDelay={toolTipDelays.enterNext} 
+                    arrow>
                         <Button size='large' onClick={() => {navigate('/admin')}}>
                             <Box
                             component={'img'}
