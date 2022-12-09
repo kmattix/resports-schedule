@@ -58,7 +58,7 @@ export default function MatchForm(props: MatchFormProps) {
             .subtract(dayjs().millisecond(), 'milliseconds'));
     }
 
-    const [snapshot, loading] = useCollection(queryGames());
+    const [snapshot] = useCollection(queryGames());
     const [games, setGames] = useState<Game[]>([]);
 
     const [submitting, setSubmitting] = useState(false);
@@ -250,7 +250,7 @@ export default function MatchForm(props: MatchFormProps) {
                                     </InputAdornment>
                                 }}>
                                 {games.map((game) => {
-                                    return (<MenuItem value={game.id}>{game.name}</MenuItem>);
+                                    return (<MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>);
                                 })}
                                 <MenuItem value='other'>Other</MenuItem>
                             </TextField>
