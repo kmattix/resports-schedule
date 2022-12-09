@@ -15,7 +15,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { refreshDelay } from './global/Settings';
 
 export default function Schedule() {
-    
     const [snapshot, loading] = useCollection(querySchedule());
     const [user] = useAuthState(auth);
 
@@ -56,59 +55,52 @@ export default function Schedule() {
         return () => clearInterval(interval);
     }, [snapshot, user]);
 
-  return (
-    <>
-    <Box
+    return (
+        <Box
         display='flex'
         justifyContent='center'
         alignItems='top'>
-        <Grid container rowSpacing={1} sx={{ maxWidth: '40rem' }}>
-            <Grid item xs={12} display='flex' justifyContent='center'>
-                <Tooltip title= {user ? 'Admin page' : 'Admin login'} arrow>
-                    <Button size='large' onClick={() => {navigate('/admin')}}>
-                        <Box
-                        component={'img'}
-                        sx={{
-                            maxWidth: 250
-                        }}
-                        alt={'Radford Esports'}
-                        src={resportslogo}/>
-                    </Button>
-                </Tooltip>
+            <Grid container rowSpacing={1} sx={{ maxWidth: '40rem' }}>
+                <Grid item xs={12} display='flex' justifyContent='center'>
+                    <Tooltip title= {user ? 'Admin page' : 'Admin login'} arrow>
+                        <Button size='large' onClick={() => {navigate('/admin')}}>
+                            <Box
+                            component={'img'}
+                            sx={{
+                                maxWidth: 250
+                            }}
+                            alt={'Radford Esports'}
+                            src={resportslogo}/>
+                        </Button>
+                    </Tooltip>
+                </Grid>
+                <Grid item xs={12} marginBottom={1}>
+                    <Divider/>
+                </Grid>
+                <Grid 
+                container 
+                item 
+                rowSpacing={2}
+                xs={12}>
+                    {loading ? <CircularProgress sx={{ marginTop: '20vh' }}/> :  
+                    schedule.length ? 
+                    schedule.map((match: MatchProps) => {
+                        return(
+                            <Grid item key={match.id} xs={12}>
+                                <Match {... match}></Match>
+                            </Grid>
+                        );
+                    }) :
+                    <Grid item xs={12}>
+                        <Typography 
+                        variant='h4' 
+                        color='text.disabled' 
+                        align='center'>
+                            No upcoming matches...
+                        </Typography>
+                    </Grid>}
+                </Grid>
             </Grid>
-
-            <Grid item xs={12} marginBottom={1}>
-                <Divider/>
-            </Grid>
-            <Grid 
-            container 
-            item 
-            rowSpacing={2} 
-            display='flex' 
-            justifyContent='center' 
-            xs={12}>
-                {loading ? <CircularProgress sx={{ marginTop: '20vh' }}/> :  
-
-                schedule.length ? 
-
-                schedule.map((match: MatchProps) => {
-                    return(
-                        <Grid item key={match.id} xs={12}>
-                            <Match {... match}></Match>
-                        </Grid>
-                    );
-                }) :
-
-                <Grid item xs={12}>
-                    <Typography 
-                    variant='h4' 
-                    color='text.disabled' 
-                    align='center'>
-                        No upcoming matches...
-                    </Typography>
-                </Grid>}
-            </Grid>
-        </Grid>
-    </Box>
-    </>);
+        </Box>
+    );
 }
