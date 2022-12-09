@@ -18,6 +18,7 @@ export const db = getFirestore();
 
 // The name for the collection to store matches into.
 const SCHEDULE_COLLECTION = 'schedule';
+const GAMES_COLLECTION = 'games'
 
 /**
  * Queries the entire schedule collection.
@@ -26,6 +27,22 @@ const SCHEDULE_COLLECTION = 'schedule';
 export const querySchedule = (): Query<DocumentData> => {
     return query(collection(db, SCHEDULE_COLLECTION));
 }
+
+/**
+ * Queries the games collection.
+ * @returns A firestore query.
+ */
+export const queryGames = (): Query<DocumentData> => {
+    return query(collection(db, 'games'));
+}
+
+/**
+ * Gets a reference to a specific game.
+ * @returns A firestore document reference.
+ */
+export const getGameRef = (game: string) => {
+    return doc(db, GAMES_COLLECTION, game);
+} 
 
 /**
  * Adds a new match to the schedule collection.

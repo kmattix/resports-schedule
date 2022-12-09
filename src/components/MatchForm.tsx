@@ -1,4 +1,6 @@
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import dayjs, { Dayjs } from 'dayjs';
@@ -9,12 +11,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-import { addMatch, modifyMatch, removeMatch } from '../utils/firebase-service';
+import { addMatch, modifyMatch, queryGames, removeMatch } from '../utils/firebase-service';
 
 import { MatchProps } from './Match';
 import GameIcon from './GameIcon';
 
-import { defaultTwitch, games, matchTimes } from './global/Settings';
+import { defaultTwitch, matchTimes } from './global/Settings';
 
 const validationSchema = yup.object({
     title: yup.string()
@@ -41,6 +43,12 @@ type MatchFormProps = {
     maxWidth?: string
 }
 
+type Game = {
+    id: string,
+    image: string,
+    name: string
+}
+
 export default function MatchForm(props: MatchFormProps) {
     const resetDatePicker = () => {
         return ( props.modify ? dayjs.unix(props.modify.matchTime) : 
@@ -49,6 +57,9 @@ export default function MatchForm(props: MatchFormProps) {
             .subtract(dayjs().second(), 'seconds')
             .subtract(dayjs().millisecond(), 'milliseconds'));
     }
+
+    const [snapshot, loading] = useCollection(queryGames());
+    const [games, setGames] = useState<Game[]>([]);
 
     const [submitting, setSubmitting] = useState(false);
     const [matchTimeVal, setMatchTimeVal] = useState<Dayjs | null>(resetDatePicker());
@@ -106,6 +117,21 @@ export default function MatchForm(props: MatchFormProps) {
             resetForm();
         }, () => setSubmitting(false));
     }
+
+    useEffect(() => {
+        let newGames: Game[] = [];
+
+        snapshot && snapshot.docs.forEach(
+            (doc: QueryDocumentSnapshot) => {
+            newGames.push({
+                    id: doc.id,
+                    image: doc.data().image,
+                    name: doc.data().name
+                });
+            });
+        
+        setGames(newGames);
+    }, [snapshot])
 
     return (
         <Card >
@@ -223,13 +249,10 @@ export default function MatchForm(props: MatchFormProps) {
                                         <GameIcon size={24} game={formik.values.game}/>
                                     </InputAdornment>
                                 }}>
-                                {Object.keys(games).map((game) => {
-                                    type GameKey = keyof typeof games;
-                                    const key = game as GameKey;
-                                    return(
-                                        <MenuItem value={game}>{games[key].name}</MenuItem>
-                                    );
+                                {games.map((game) => {
+                                    return (<MenuItem value={game.id}>{game.name}</MenuItem>);
                                 })}
+                                <MenuItem value='other'>Other</MenuItem>
                             </TextField>
                         </Grid>
                         <Grid item xs={12}>

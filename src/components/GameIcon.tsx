@@ -1,30 +1,42 @@
-import React from 'react'
+import React from 'react';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 
-import { games } from './global/Settings';
+import { getGameRef } from '../utils/firebase-service';
 
 type GameIconProps = {
     game: string,
     size?: number
 }
 
+const defaultSize = 100;
+
+function OtherIcon(props: GameIconProps) {
+    return (
+    <VideogameAssetIcon sx={{ 
+        fontSize: props.size || defaultSize, 
+        color: '#FFFFFF'}}/>
+    );
+}
+
 export default function GameIcon(props: GameIconProps) {
-    const defaultSize = 100;
+    const [game, loading, error] =  useDocumentData(getGameRef(props.game));
 
-    type GameKey = keyof typeof games;
-    const game = props.game as GameKey;
-
-    return (game === 'other' ? 
-    <VideogameAssetIcon sx={{ fontSize: props.size || defaultSize, color: '#FFFFFF'}}/> : 
-    <Box
-        component={'img'}
-        sx={{
-            maxHeight: props.size || defaultSize,
-            maxWidth: props.size || defaultSize
-        }}
-        alt={props.game}
-        src={games[game].image}
-    />);
+    return (<>
+        {props.game === 'other' ?
+        <OtherIcon {... props}/> :
+        loading ? <CircularProgress/> :
+        game ? <Box
+            component={'img'}
+            sx={{
+                maxHeight: props.size || defaultSize,
+                maxWidth: props.size || defaultSize
+            }}
+            alt={' '}
+            src={game.image}
+        /> :
+        error && <OtherIcon {... props}/>}
+    </>);
 }

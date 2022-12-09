@@ -82,7 +82,9 @@ export default function Schedule() {
                     <Divider/>
                 </Grid>
                 <Grid 
-                container 
+                container
+                display='flex'
+                justifyContent='center' 
                 item 
                 rowSpacing={2}
                 xs={12}>
