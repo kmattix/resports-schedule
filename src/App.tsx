@@ -4,11 +4,11 @@ import { Helmet } from 'react-helmet';
 
 import { ThemeProvider } from '@mui/material/styles';
 
-import Schedule from './components/Schedule';
-import Admin from './components/Admin';
-import SignIn from './components/SignIn';
+import Schedule from './pages/Schedule';
+import Admin from './pages/Admin';
+import SignIn from './pages/SignIn';
 
-import { defaultTheme } from './components/global/Theme';
+import { defaultTheme } from './global/Theme';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';

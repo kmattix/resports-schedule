@@ -3,7 +3,7 @@ import isYesterday from 'dayjs/plugin/isYesterday';
 
 import { MatchProps } from '../components/Match';
 
-import { matchTimes } from '../components/global/Settings';
+import { matchTimes } from '../global/Settings';
 
 dayjs.extend(isYesterday);
 

@@ -8,11 +8,11 @@ import { Box, Button, CircularProgress, Divider, Grid, Tooltip, Typography } fro
 import { auth, querySchedule, removeOldMatches } from '../utils/firebase-service';
 import { formatSchedule } from '../utils/schedule-utilities';
 
-import Match, { MatchProps } from './Match';
+import Match, { MatchProps } from '../components/Match';
 
 import resportslogo from '../assets/logo4231.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { refreshDelay, toolTipDelays } from './global/Settings';
+import { refreshDelay, toolTipDelays } from '../global/Settings';
 
 export default function Schedule() {
     const [snapshot, loading] = useCollection(querySchedule());

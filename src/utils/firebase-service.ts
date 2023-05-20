@@ -7,7 +7,7 @@ import { collection, query } from 'firebase/firestore';
 
 import { MatchProps } from '../components/Match';
 
-import { matchTimes } from '../components/global/Settings';
+import { matchTimes } from '../global/Settings';
 
 import { firebaseConfig } from '../firebase.config';
 

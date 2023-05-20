@@ -9,7 +9,7 @@ import { formatMatchDate }  from '../utils/schedule-utilities';
 import { auth } from '../utils/firebase-service';
 
 import MatchForm from './MatchForm';
-import { toolTipDelays } from './global/Settings';
+import { toolTipDelays } from '../global/Settings';
 
 import GameIcon from './GameIcon';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';

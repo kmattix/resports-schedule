@@ -16,7 +16,7 @@ import { addMatch, modifyMatch, queryGames, removeMatch } from '../utils/firebas
 import { MatchProps } from './Match';
 import GameIcon from './GameIcon';
 
-import { defaultTwitch, matchTimes } from './global/Settings';
+import { defaultTwitch, matchTimes } from '../global/Settings';
 
 const validationSchema = yup.object({
     title: yup.string()

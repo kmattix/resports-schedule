@@ -9,7 +9,7 @@ import { CalendarMonth, Logout } from '@mui/icons-material';
 
 import { auth } from '../utils/firebase-service';
 
-import MatchForm from './MatchForm';
+import MatchForm from '../components/MatchForm';
 
 import resportsLogo from '../assets/logo192.png';
 
