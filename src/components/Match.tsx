@@ -6,13 +6,14 @@ import { Box, Button, Card, CardContent, Grid, IconButton, Modal, SvgIcon, Toolt
 import { MoreHoriz } from '@mui/icons-material';
 
 import { formatMatchDate }  from '../utils/schedule-utilities';
-import { auth } from '../utils/firebase-service';
+import { auth, getGameRef } from '../utils/firebase-service';
 
 import MatchForm from './MatchForm';
 import { toolTipDelays } from '../global/Settings';
 
 import GameIcon from './GameIcon';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 export type MatchProps = {
     id?: string,
@@ -26,6 +27,8 @@ export type MatchProps = {
 
 export default function Match(props: MatchProps) {
     const [user] = useAuthState(auth);
+
+    const [game] =  useDocumentData(getGameRef(props.game));
 
     const [showContext, setShowContext] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -75,6 +78,11 @@ export default function Match(props: MatchProps) {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <Typography variant='caption' color={'text.secondary'} noWrap>
+                                        {game ? game.name : ''}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
                                     <Typography variant='h6' noWrap>
                                         {props.home}{props.away ? ` vs ${props.away}` : ''}
                                     </Typography>  
@@ -109,7 +117,9 @@ export default function Match(props: MatchProps) {
                                 display: 'flex', 
                                 justifyContent: 'center', 
                                 alignItems: 'center' }}>
-                            <GameIcon game={props.game}/>
+                            <Grid item xs={12}>
+                                <GameIcon game={props.game}/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </CardContent>
