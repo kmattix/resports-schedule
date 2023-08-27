@@ -156,7 +156,7 @@ export default function MatchForm(props: MatchFormProps) {
                                 fullWidth
                                 id='title'
                                 name='title'
-                                label='Match Title'
+                                label='Event Title'
                                 value={formik.values.title}
                                 onChange={formik.handleChange}
                                 error={formik.touched.title && 
