@@ -37,7 +37,6 @@ export const formatSchedule = (schedule: Array<MatchProps>): Array<MatchProps> =
  */
 export const formatMatchDate = (n: number): string => {
     const d = dayjs.unix(n);
-    let day = '';
 
     if (d.unix() < dayjs().subtract(1, 'hour').unix()) {
         return 'Completed';
@@ -47,40 +46,6 @@ export const formatMatchDate = (n: number): string => {
         return 'Live Now';
     }
 
-    if(dayjs().add(7, 'day').unix() > d.unix()) {
-        if(d.day() === dayjs().day()) {
-            day = 'Today';
-        } 
-        else {
-            switch(d.day()) {
-                case 0:
-                    day = 'Sunday';
-                    break;
-                case 1:
-                    day = 'Monday';
-                    break;
-                case 2:
-                    day = 'Tuesday';
-                    break;
-                case 3:
-                    day = 'Wednesday';
-                    break;
-                case 4:
-                    day = 'Thursday';
-                    break;
-                case 5:
-                    day = 'Friday';
-                    break;
-                case 6:
-                    day = 'Saturday';
-                    break;
-            }
-        }  
-    }
-    else {
-        day = `${d.month() + 1}/${d.date()}`;
-    }
-
     let hours = d.hour();
     let minutes = d.minute();
     let ampm = hours >= 12 ? 'PM' : 'AM';
@@ -88,6 +53,34 @@ export const formatMatchDate = (n: number): string => {
     hours = hours ? hours : 12;
 
     return (
-        `${day} @ ${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`
+        `${formatDay(d)} @ ${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`
     );
+}
+
+const formatDay = (d: dayjs.Dayjs): string => {
+    if(d.unix() < dayjs().subtract(1, 'day').unix()) {
+        return 'Today';
+    }
+
+    if (dayjs().add(7, 'day').unix() > d.unix()) {
+
+        switch (d.day()) {
+            case 0:
+                return 'Sunday';
+            case 1:
+                return 'Monday';
+            case 2:
+                return 'Tuesday';
+            case 3:
+                return 'Wednesday';
+            case 4:
+                return 'Thursday';
+            case 5:
+                return 'Friday';
+            case 6:
+                return 'Saturday';
+        }
+    }
+    
+    return `${d.month() + 1}/${d.date()}`;
 }
