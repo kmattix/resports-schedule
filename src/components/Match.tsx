@@ -14,6 +14,7 @@ import { toolTipDelays } from '../global/Settings';
 import GameIcon from './GameIcon';
 import { ReactComponent as TwitchIcon} from '../assets/twitch_logo.svg';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { isMobile } from 'react-device-detect';
 
 export type MatchProps = {
     id?: string,
@@ -118,7 +119,7 @@ export default function Match(props: MatchProps) {
                                 justifyContent: 'center', 
                                 alignItems: 'center' }}>
                             <Grid item xs={12}>
-                                <GameIcon game={props.game}/>
+                                <GameIcon game={props.game} size={isMobile? 65 : 100}/>
                             </Grid>
                         </Grid>
                     </Grid>
