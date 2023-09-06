@@ -44,6 +44,32 @@ Here you can choose to modify or delete a match.
 - The security permissions set up in the [firestore security rules](https://firebase.google.com/docs/firestore/security/rules-structure) are made so that no writes can be made to any data unless it's from an authenticated user. Any user can make reads, because all the data is meant to be public.
 - Adding new users can only be done through the [firebase console](https://console.firebase.google.com/). This app is really not meant to be making new accounts as they have full access over the data. This is a security measure. 
 
+## Getting Started with Firebase
+
+This projects runs on Firebase. There is some inital setup that needs to be done in order to get the project working after cloning the repository.
+
+### Create the config file
+
+In `\src` run the Unix command (or equivalent):
+`touch firebase.config.js`
+
+### Add the API config
+
+Edit the file that was created to contain the [Firebase API config](https://firebase.google.com/docs/web/setup?hl=en&authuser=0&_gl=1*1rgdprr*_ga*MTY0MDQ5MDY1Mi4xNjg3MDQzMDM1*_ga_CW55HF8NVT*MTY5NDAzNzUyMC4zLjEuMTY5NDAzODQ5NS4wLjAuMA..#add-sdks-initialize). This can be found on the [Firebase console](https://console.firebase.google.com/). It should look something like this afterwards (with non-placeholder data obviously):
+```
+export const firebaseConfig = {
+  apiKey: "************************",
+  authDomain: "************************",
+  databaseURL: "************************",
+  projectId: "************************",
+  storageBucket: "************************",
+  messagingSenderId: "************************",
+  appId: "************************",
+  measurementId: "************************"
+};
+```
+*NOTE: The* `export` *is important since the config is in a seperate file from where it's being used. This is done to hide the API key from the public (bad). This file is added to .gitignore by default so you don't need to worry about pushing it to the repository by accident.*
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
