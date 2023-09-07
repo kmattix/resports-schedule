@@ -58,8 +58,12 @@ export const formatMatchDate = (n: number): string => {
 }
 
 const formatDay = (d: dayjs.Dayjs): string => {
-    if(d.unix() < dayjs().add(1, 'day').unix()) {
+    if(d.unix() < dayjs().endOf('day').unix()) {
         return 'Today';
+    }
+
+    if(d.unix() < dayjs().add(1, 'day').endOf('day').unix()) {
+        return 'Tomorrow';
     }
 
     if (dayjs().add(7, 'day').unix() > d.unix()) {
