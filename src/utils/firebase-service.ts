@@ -1,9 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, deleteDoc, doc, DocumentData, getFirestore, Query, setDoc } 
+import { addDoc, deleteDoc, doc, DocumentData, getFirestore, Query, setDoc }
     from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { collection, query } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 import { MatchProps } from '../components/Match';
 
@@ -19,6 +20,9 @@ export const db = getFirestore();
 // The name for the collection to store matches into.
 const SCHEDULE_COLLECTION = 'schedule';
 const GAMES_COLLECTION = 'games'
+
+// The storage bucket name for game icons.
+const GAME_LOGO_STORAGE = 'game_logos';
 
 /**
  * Queries the entire schedule collection.
@@ -42,7 +46,17 @@ export const queryGames = (): Query<DocumentData> => {
  */
 export const getGameRef = (game: string) => {
     return doc(db, GAMES_COLLECTION, game);
-} 
+}
+
+export const getGameIconUrl = async (game: string): Promise<string> => {
+    return getDownloadURL(ref(getStorage(), `${GAME_LOGO_STORAGE}/${game}.png`))
+        .then((url) => {
+            return url;
+        })
+        .catch((error) => {
+            return 'other';
+        });
+}
 
 /**
  * Adds a new match to the schedule collection.
@@ -83,7 +97,7 @@ export const removeMatch = async (id: string) => {
  */
 export const removeOldMatches = async (matches: MatchProps[]) => {
     matches.forEach((match) => {
-        if (match.matchTime < matchTimes.minModifyPassed.unix() && match.id) 
+        if (match.matchTime < matchTimes.minModifyPassed.unix() && match.id)
             removeMatch(match.id);
     })
 }
