@@ -31,13 +31,17 @@ describe('formatMatchDate', () => {
         expect(formatMatchDate(dayjs().hour(23).unix()).split(' ')[0]).toBe('Today');
     });
 
+    test('tomorrow', () => {
+        expect(formatMatchDate(dayjs().add(1, 'day').unix()).split(' ')[0]).toBe('Tomorrow');
+    });
+
     test('this week', () => {
         const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         expect(formatMatchDate(dayjs().unix()).split(' ')[0]).toBe('Today');
         expect(formatMatchDate(dayjs().hour(23).unix()).split(' ')[0]).toBe('Today');
         expect(daysInWeek)
-            .toContain(formatMatchDate(dayjs().add(1, 'day').unix()).split(' ')[0]);
+            .toContain(formatMatchDate(dayjs().add(2, 'day').unix()).split(' ')[0]);
         expect(daysInWeek)
             .toContain(formatMatchDate(dayjs().add(6, 'day').unix()).split(' ')[0]);
         expect(formatMatchDate(dayjs().add(7, 'day').unix()).split(' ')[0])
