@@ -58,7 +58,7 @@ export const formatMatchDate = (n: number): string => {
 }
 
 const formatDay = (d: dayjs.Dayjs): string => {
-    if(d.unix() < dayjs().subtract(1, 'day').unix()) {
+    if(d.unix() < dayjs().add(1, 'day').unix()) {
         return 'Today';
     }
 
